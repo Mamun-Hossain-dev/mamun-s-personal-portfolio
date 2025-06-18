@@ -9,7 +9,7 @@ const page = () => {
   return (
     <div className="container mx-auto min-h-screen bg-gray-900">
       {/* navbar section */}
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Hero section */}
       <Hero />
@@ -21,7 +21,7 @@ const page = () => {
       <Services />
 
       {/* footer section */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

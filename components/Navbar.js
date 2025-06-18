@@ -9,11 +9,10 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About Me", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Latest Works", href: "#latest" },
-    { name: "Contact", href: "#connect" },
+    { name: "Home", href: "/" },
+    { name: "Latest Works", href: "/latest-works" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Contact", href: "/contact" },
   ];
 
   // Handle scroll effect for navbar
@@ -25,26 +24,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Scroll to section with offset for fixed navbar
-  const scrollToSection = (sectionId) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      const offset = 80; // navbar height
-      const elementPosition =
-        element.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elementPosition - offset,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  // Handle link click for mobile menu
-  const handleLinkClick = (href) => {
-    setIsMenuOpen(false);
-    scrollToSection(href);
-  };
 
   return (
     <motion.nav
@@ -119,59 +98,69 @@ const Navbar = () => {
           <div className="hidden md:flex">
             <div className="flex items-center space-x-1 bg-gray-900/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
                   className="relative px-4 py-2 rounded-lg group"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
                     {item.name}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Desktop Connect Button */}
-          <div className="hidden md:block">
-            <a
-              href="#connect"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("#connect");
-              }}
-            >
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-3">
+            <Link href="/register">
               <motion.button
                 whileHover={{
                   scale: 1.05,
                   backgroundPosition: "100% 0",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-2.5 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom"
+                className="px-5 py-2 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all"
               >
-                Connect With Me
+                Register
               </motion.button>
-            </a>
+            </Link>
+            <Link href="/login">
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  backgroundPosition: "100% 0",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-5 py-2 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom"
+              >
+                Login
+              </motion.button>
+            </Link>
           </div>
 
-          {/* Mobile Connect Button */}
+          {/* Mobile Auth Button - Visible only on mobile */}
           <div className="md:hidden">
-            <a
-              href="#connect"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("#connect");
-              }}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-300 hover:text-white"
             >
-              <button className="px-4 py-2 rounded-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white">
-                Connect
-              </button>
-            </a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -184,10 +173,10 @@ const Navbar = () => {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden bg-gray-900/95 backdrop-blur-xl overflow-hidden"
+              className="md:hidden bg-gray-900/95 backdrop-blur-xl overflow-hidden rounded-xl mt-2"
             >
               <div className="container mx-auto px-4 py-4">
-                <ul className="space-y-3">
+                <ul className="space-y-3 mb-6">
                   {navItems.map((item) => (
                     <motion.li
                       key={item.name}
@@ -195,19 +184,43 @@ const Navbar = () => {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <a
+                      <Link
                         href={item.href}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleLinkClick(item.href);
-                        }}
+                        onClick={() => setIsMenuOpen(false)}
                         className="block px-4 py-3 text-gray-300 hover:text-white rounded-lg hover:bg-gray-800/50 transition-colors"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </motion.li>
                   ))}
                 </ul>
+
+                <div className="flex space-x-4 px-4">
+                  <Link
+                    href="/register"
+                    className="flex-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full px-4 py-2.5 rounded-lg font-medium bg-white/10 border border-white/20 text-white"
+                    >
+                      Register
+                    </motion.button>
+                  </Link>
+                  <Link
+                    href="/login"
+                    className="flex-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full px-4 py-2.5 rounded-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                    >
+                      Login
+                    </motion.button>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCallback, memo } from "react";
+import { Github, Linkedin, Twitter, Instagram, Mail } from "lucide-react";
 
 // Animation variants
 const containerVariants = {
@@ -47,6 +48,15 @@ const buttonVariants = {
   tap: { scale: 0.98 },
 };
 
+const iconVariants = {
+  hover: {
+    y: -5,
+    scale: 1.1,
+    color: "#ec4899",
+    transition: { duration: 0.3 },
+  },
+};
+
 const Hero = memo(() => {
   const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
@@ -65,6 +75,30 @@ const Hero = memo(() => {
   const handleResumeClick = useCallback(() => {
     window.open("/resume.pdf", "_blank");
   }, []);
+
+  const socialLinks = [
+    { icon: <Github size={24} />, url: "https://github.com", label: "GitHub" },
+    {
+      icon: <Linkedin size={24} />,
+      url: "https://linkedin.com",
+      label: "LinkedIn",
+    },
+    {
+      icon: <Twitter size={24} />,
+      url: "https://twitter.com",
+      label: "Twitter",
+    },
+    {
+      icon: <Instagram size={24} />,
+      url: "https://instagram.com",
+      label: "Instagram",
+    },
+    {
+      icon: <Mail size={24} />,
+      url: "mailto:alex@example.com",
+      label: "Email",
+    },
+  ];
 
   return (
     <motion.section
@@ -133,15 +167,24 @@ const Hero = memo(() => {
               </motion.button>
             </motion.div>
 
+            {/* Social Icons Section */}
             <motion.div
-              className="mt-14 flex justify-center lg:justify-start space-x-8"
+              className="mt-14 flex justify-center lg:justify-start space-x-6"
               variants={itemVariants}
             >
-              {["Microsoft", "Tesla", "Apple"].map((company) => (
-                <div key={company} className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-purple-500 mr-2"></div>
-                  <span className="text-gray-300 font-medium">{company}</span>
-                </div>
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                  variants={iconVariants}
+                  whileHover="hover"
+                  aria-label={social.label}
+                >
+                  {social.icon}
+                </motion.a>
               ))}
             </motion.div>
           </motion.div>
