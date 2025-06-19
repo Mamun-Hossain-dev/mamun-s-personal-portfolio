@@ -7,7 +7,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="container mx-auto min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black">
       {/* navbar section */}
       {/* <Navbar /> */}
 
