@@ -72,9 +72,18 @@ export default function RegisterPage() {
       await registerWithEmail(formData.name, formData.email, formData.password);
       router.push("/");
     } catch (error) {
-      setFirestoreError(
-        error.message || "Registration failed. Please try again."
-      );
+      // Custom error handling for Firebase Auth
+      let msg = "Registration failed. Please try again.";
+      if (error.code === "auth/email-already-in-use") {
+        msg = "This email is already registered.";
+      } else if (error.code === "auth/invalid-email") {
+        msg = "Invalid email address.";
+      } else if (error.code === "auth/weak-password") {
+        msg = "Password should be at least 6 characters.";
+      } else if (error.message) {
+        msg = error.message;
+      }
+      setFirestoreError(msg);
     } finally {
       setLoading(false);
     }
@@ -87,9 +96,16 @@ export default function RegisterPage() {
       await signInWithGoogle();
       router.push("/");
     } catch (error) {
-      setFirestoreError(
-        error.message || "Google sign-in failed. Please try again."
-      );
+      // Custom error handling for Google sign-in
+      let msg = "Google sign-in failed. Please try again.";
+      if (error.code === "auth/account-exists-with-different-credential") {
+        msg = "An account already exists with this email.";
+      } else if (error.code === "auth/popup-closed-by-user") {
+        msg = "Sign-in popup was closed before completing.";
+      } else if (error.message) {
+        msg = error.message;
+      }
+      setFirestoreError(msg);
     } finally {
       setLoading(false);
     }

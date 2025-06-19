@@ -80,7 +80,20 @@ export default function LoginPage() {
       await signInWithEmail(formData.email, formData.password);
       router.push("/");
     } catch (error) {
-      setFirestoreError(error.message || "Login failed. Please try again.");
+      // Custom error handling for Firebase Auth
+      let msg = "Login failed. Please try again.";
+      if (error.code === "auth/user-not-found") {
+        msg = "No account found with this email address.";
+      } else if (error.code === "auth/wrong-password") {
+        msg = "Incorrect password. Please try again.";
+      } else if (error.code === "auth/too-many-requests") {
+        msg = "Too many attempts. Account temporarily locked.";
+      } else if (error.code === "auth/user-disabled") {
+        msg = "This account has been disabled.";
+      } else if (error.message) {
+        msg = error.message;
+      }
+      setFirestoreError(msg);
     } finally {
       setLoading(false);
     }
@@ -95,9 +108,16 @@ export default function LoginPage() {
       await signInWithGoogle();
       router.push("/");
     } catch (error) {
-      setFirestoreError(
-        error.message || "Google sign-in failed. Please try again."
-      );
+      // Custom error handling for Google sign-in
+      let msg = "Google sign-in failed. Please try again.";
+      if (error.code === "auth/account-exists-with-different-credential") {
+        msg = "An account already exists with this email.";
+      } else if (error.code === "auth/popup-closed-by-user") {
+        msg = "Sign-in popup was closed before completing.";
+      } else if (error.message) {
+        msg = error.message;
+      }
+      setFirestoreError(msg);
     } finally {
       setLoading(false);
     }
