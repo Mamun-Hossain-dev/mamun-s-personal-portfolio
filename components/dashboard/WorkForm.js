@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { doc, setDoc, collection, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/config/firebase.config";
@@ -178,9 +179,11 @@ export default function WorkForm({ work, onClose, onSuccess }) {
             </div>
             {formData.imageUrl && !formData.imageFile && (
               <div className="mt-2">
-                <img
+                <Image
                   src={formData.imageUrl}
                   alt="Preview"
+                  width={320}
+                  height={240}
                   className="max-w-xs h-auto rounded-lg"
                 />
               </div>

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import WorkForm from "@/components/dashboard/WorkForm";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
@@ -87,9 +88,11 @@ export default function LatestWorksPage() {
               className="bg-white rounded-xl shadow-sm overflow-hidden"
             >
               {work.imageUrl ? (
-                <img
+                <Image
                   src={work.imageUrl}
                   alt={work.title}
+                  width={400}
+                  height={192}
                   className="w-full h-48 object-cover"
                 />
               ) : (

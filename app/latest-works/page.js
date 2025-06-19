@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { collection, getDocs } from "firebase/firestore";
@@ -49,9 +50,11 @@ export default function LatestWorksPage() {
                 className="bg-white rounded-xl shadow-md overflow-hidden"
               >
                 {work.imageUrl ? (
-                  <img
+                  <Image
                     src={work.imageUrl}
                     alt={work.title}
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-cover"
                   />
                 ) : (

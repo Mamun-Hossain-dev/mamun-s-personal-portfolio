@@ -4,6 +4,7 @@
 import { AuthProvider } from "@/AuthContext";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import WhatsAppButton from "./WhatsAppButton";
 
 export default function ClientLayout({ children }) {
   return (
@@ -12,6 +13,7 @@ export default function ClientLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <WhatsAppButton />
       </AuthProvider>
     </>
   );
