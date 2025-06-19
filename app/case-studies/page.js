@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
 
@@ -162,7 +161,6 @@ export default function CaseStudiesPage() {
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 }

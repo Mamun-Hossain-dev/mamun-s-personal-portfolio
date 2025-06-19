@@ -234,7 +234,7 @@ const Navbar = () => {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500/95 backdrop-blur-xl overflow-hidden rounded-xl mt-2"
+              className="md:hidden bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl overflow-hidden rounded-xl mt-2"
             >
               <div className="container mx-auto px-4 py-4">
                 <ul className="space-y-3 mb-6">
@@ -256,32 +256,68 @@ const Navbar = () => {
                   ))}
                 </ul>
 
-                <div className="flex space-x-4 px-4">
-                  <Link
-                    href="/register"
-                    className="flex-1"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full px-4 py-2.5 rounded-lg font-medium bg-white/10 border border-white/20 text-white"
+                {user ? (
+                  <div className="px-4">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-800">
+                        {user.displayName?.[0] || user.email?.[0] || "U"}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white">
+                          {user.displayName || user.email}
+                        </div>
+                        <div className="text-xs text-gray-400">{role}</div>
+                      </div>
+                    </div>
+                    {role === "admin" && (
+                      <button
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          router.push("/dashboard");
+                        }}
+                        className="block w-full text-left px-4 py-2 rounded hover:bg-purple-100 text-purple-700 mb-2"
+                      >
+                        Admin Dashboard
+                      </button>
+                    )}
+                    <button
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        logout();
+                      }}
+                      className="block w-full text-left px-4 py-2 rounded hover:bg-red-100 text-red-700 flex items-center"
                     >
-                      Register
-                    </motion.button>
-                  </Link>
-                  <Link
-                    href="/login"
-                    className="flex-1"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full px-4 py-2.5 rounded-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                      <LogOut size={16} className="mr-2" /> Logout
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex space-x-4 px-4">
+                    <Link
+                      href="/register"
+                      className="flex-1"
+                      onClick={() => setIsMenuOpen(false)}
                     >
-                      Login
-                    </motion.button>
-                  </Link>
-                </div>
+                      <motion.button
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full px-4 py-2.5 rounded-lg font-medium bg-white/10 border border-white/20 text-white"
+                      >
+                        Register
+                      </motion.button>
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="flex-1"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <motion.button
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full px-4 py-2.5 rounded-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                      >
+                        Login
+                      </motion.button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
