@@ -3,7 +3,14 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCallback, memo } from "react";
-import { Github, Linkedin, Twitter, Instagram, Mail } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Mail,
+  Facebook,
+} from "lucide-react";
 
 // Animation variants
 const containerVariants = {
@@ -69,11 +76,11 @@ const Hero = memo(() => {
   }, []);
 
   const handleConnectClick = useCallback(() => {
-    scrollToSection("connect");
-  }, [scrollToSection]);
+    window.location.href = "/contact";
+  }, []);
 
   const handleResumeClick = useCallback(() => {
-    window.open("/resume.pdf", "_blank");
+    window.open("/Professional%20Minimalist%20CV%20Resume.pdf", "_blank");
   }, []);
 
   const socialLinks = [
@@ -103,18 +110,23 @@ const Hero = memo(() => {
   return (
     <motion.section
       id="home"
-      className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-900 to-gray-950"
+      className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-900 to-black"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      {/* Simplified background elements - fixed positioning */}
+      {/* Pattern icon background */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-pink-500/5 rounded-full blur-3xl" />
+        <Image
+          src="/images/theme_pattern.svg"
+          alt="pattern-icon"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-20"
+        />
       </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Text content */}
@@ -125,22 +137,20 @@ const Hero = memo(() => {
             <motion.div variants={itemVariants}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500">
-                  Im Alex Bennett,
+                  I&apos;m Tanzil Hossain,
                 </span>
                 <span className="block mt-2 text-white">
-                  Frontend Developer
+                  Professional Digital Marketer
                 </span>
               </h1>
             </motion.div>
-
             <motion.p
               className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl"
               variants={itemVariants}
             >
-              Crafting beautiful, responsive web experiences with React and
-              modern JavaScript. Based in California, USA.
+              I&apos;m an AI-powered, data-driven digital marketer based
+              worldwide, helping businesses grow online.
             </motion.p>
-
             <motion.div
               className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               variants={itemVariants}
@@ -150,64 +160,80 @@ const Hero = memo(() => {
                 whileHover="hover"
                 whileTap="tap"
                 onClick={handleConnectClick}
-                className="px-8 py-3.5 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom"
-                aria-label="Connect with Alex Bennett"
+                className="px-8 py-3.5 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom cursor-pointer"
+                aria-label="Connect with Tanzil Hossain"
               >
                 Connect with me
               </motion.button>
-
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleResumeClick}
-                className="px-8 py-3.5 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all"
-                aria-label="View Alex Bennett's resume"
+                className="px-8 py-3.5 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all cursor-pointer"
+                aria-label="View Tanzil Hossain's resume"
               >
                 View Resume
               </motion.button>
             </motion.div>
-
-            {/* Social Icons Section */}
+            {/* Social Links */}
             <motion.div
-              className="mt-14 flex justify-center lg:justify-start space-x-6"
+              className="mt-10 flex justify-center lg:justify-start gap-6"
               variants={itemVariants}
             >
-              {socialLinks.map((social, index) => (
+              {[
+                {
+                  icon: <Linkedin size={28} />,
+                  url: "https://linkedin.com",
+                  label: "LinkedIn",
+                },
+                {
+                  icon: <Instagram size={28} />,
+                  url: "https://instagram.com",
+                  label: "Instagram",
+                },
+                {
+                  icon: <Facebook size={28} />,
+                  url: "https://facebook.com",
+                  label: "Facebook",
+                },
+                {
+                  icon: <Twitter size={28} />,
+                  url: "https://twitter.com",
+                  label: "Twitter",
+                },
+              ].map((social, idx) => (
                 <motion.a
                   key={social.label}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
-                  variants={iconVariants}
-                  whileHover="hover"
                   aria-label={social.label}
+                  className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                  whileHover={{ scale: 1.15, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {social.icon}
                 </motion.a>
               ))}
             </motion.div>
           </motion.div>
-
-          {/* Image container - simplified without moving elements */}
+          {/* Image container */}
           <motion.div
             className="relative lg:w-1/2 flex justify-center"
             variants={floatingVariants}
             animate="float"
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80">
-              {/* Profile image with subtle border */}
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-transparent bg-gradient-to-br from-purple-500 to-pink-500 p-1">
                 <div className="absolute inset-0 rounded-full overflow-hidden">
                   <Image
                     src={"/images/Tanzilhossain.jpg"}
-                    alt="Alex Bennett - Frontend Developer"
-                    layout="fill"
-                    objectFit="cover"
+                    alt="Tanzil Hossain - Digital Marketer"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    style={{ objectFit: "cover" }}
                     className="scale-105"
                     priority
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
               </div>
@@ -215,7 +241,6 @@ const Hero = memo(() => {
           </motion.div>
         </div>
       </div>
-
       {/* Scrolling indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"

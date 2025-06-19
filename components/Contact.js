@@ -145,20 +145,20 @@ const ContactSection = () => {
     {
       icon: <Mail className="text-purple-400" size={24} />,
       title: "Email Us",
-      detail: "Upskilldigitalagency@gmail.com",
-      href: "mailto:Upskilldigitalagency@gmail.com",
+      detail: "Tanjildigital@gmail.com",
+      href: "mailto:Tanjildigital@gmail.com",
     },
     {
-      icon: <Phone className="text-pink-400" size={24} />,
+      icon: (
+        <img
+          src="/images/call_icon.svg"
+          alt="call icon"
+          className="w-6 h-6 inline"
+        />
+      ),
       title: "Call Us",
-      detail: "+880 1619599140",
-      href: "tel:+880 1619599140",
-    },
-    {
-      icon: <MapPin className="text-blue-400" size={24} />,
-      title: "Visit Us",
-      detail: "78 Faidabad transmitter moor, Design Uttarkhan, Dhaka-1230",
-      href: "https://www.google.com/maps/place/Upskill+It+Institute/@23.8799222,90.4142166,20z/data=!4m6!3m5!1s0x3755c50aa9cdbcf9:0x754341fb9fa3aee5!8m2!3d23.8799284!4d90.4144107!16s%2Fg%2F11t84rxfvw?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoASAFQAw%3D%3D",
+      detail: "+8801948873556",
+      href: "tel:+8801948873556",
     },
   ];
 
@@ -171,7 +171,7 @@ const ContactSection = () => {
   return (
     <section
       id="connect"
-      className="py-20 bg-gradient-to-br from-gray-900 to-black"
+      className="pt-10 pb-20 bg-gradient-to-br from-gray-900 to-black"
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Section title */}

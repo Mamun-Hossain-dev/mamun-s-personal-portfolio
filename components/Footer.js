@@ -32,17 +32,35 @@ const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: <Mail size={20} />, text: "alex@example.com" },
-    { icon: <Phone size={20} />, text: "+1 (555) 123-4567" },
-    { icon: <MapPin size={20} />, text: "San Francisco, CA" },
+    {
+      icon: (
+        <img src="/images/mail_icon.svg" alt="mail icon" className="w-6 h-6" />
+      ),
+      text: "Tanjildigital@gmail.com",
+    },
+    {
+      icon: (
+        <img src="/images/call_icon.svg" alt="call icon" className="w-6 h-6" />
+      ),
+      text: "+8801948873556",
+    },
+    {
+      icon: (
+        <img
+          src="/images/location_icon.svg"
+          alt="location icon"
+          className="w-6 h-6"
+        />
+      ),
+      text: "Dhaka, Bangladesh",
+    },
   ];
 
   const footerLinks = [
-    { title: "Home", href: "#home" },
-    { title: "About", href: "#about" },
-    { title: "Services", href: "#services" },
-    { title: "Portfolio", href: "#portfolio" },
-    { title: "Contact", href: "#contact" },
+    { title: "Home", href: "/" },
+    { title: "Latest Works", href: "/latest-works" },
+    { title: "Case Studies", href: "/case-studies" },
+    { title: "Contact", href: "/contact" },
   ];
 
   return (
@@ -63,13 +81,13 @@ const Footer = () => {
             >
               <div className="bg-gray-900 p-2 rounded-md">
                 <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
-                  Alex Bennett
+                  Tanzil Hossain
                 </h2>
               </div>
             </motion.div>
             <p className="mt-4 text-gray-400 max-w-xs">
-              Creating beautiful, responsive web experiences with React and
-              modern JavaScript.
+              I&apos;m Tanzil Hossain, an AI-powered, data-driven digital
+              marketer based worldwide, helping businesses grow online.
             </p>
 
             {/* Social Icons */}
@@ -141,12 +159,26 @@ const Footer = () => {
             <p className="text-gray-400 mb-4">
               Subscribe to get the latest updates on web development trends.
             </p>
-            <form className="space-y-4">
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.target;
+                const email = form.elements.email.value;
+                if (email) {
+                  alert(`Subscribed with: ${email}`);
+                  form.reset();
+                }
+              }}
+            >
               <div className="relative">
                 <input
+                  id="footer-subscribe-email"
+                  name="email"
                   type="email"
                   placeholder="Your email address"
                   className="w-full px-4 py-3 bg-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  required
                 />
                 <motion.button
                   type="submit"

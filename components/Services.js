@@ -30,7 +30,7 @@ const Services = () => {
         "Track user behavior and campaign performance using Google Tag Manager and GA4 to guide data-driven decisions and boost conversions.",
     },
     {
-      number: "06",
+      number: "05",
       title: "Email Marketing",
       description:
         "Create personalized, high-converting email campaigns to nurture leads, increase customer retention, and drive long-term growth.",
@@ -115,7 +115,9 @@ const Services = () => {
           className="flex justify-center mt-16"
         >
           <button
-            onClick={() => scrollToSection("connect")}
+            onClick={() => {
+              window.location.href = "/contact";
+            }}
             className="group flex items-center gap-3 px-8 py-4 rounded-full font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom hover:shadow-xl hover:shadow-purple-500/30"
           >
             <span>Get in Touch</span>
