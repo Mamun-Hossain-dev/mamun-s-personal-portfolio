@@ -1,17 +1,39 @@
-// AuthContext.js
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "./config/firebase.config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./config/firebase.config";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState("");
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser || null);
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        // Check user role in Firestore
+        const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setUser({
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            displayName: firebaseUser.displayName,
+          });
+          setRole(userData.role || "user");
+        } else {
+          // If user document doesn't exist, create one?
+          setUser(null);
+          setRole("");
+        }
+      } else {
+        setUser(null);
+        setRole("");
+      }
       setLoading(false);
     });
 
@@ -19,12 +41,18 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = async () => {
-    await signOut(auth);
+    try {
+      await signOut(auth);
+      setUser(null);
+      setRole("");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, logout }}>
-      {!loading && children}
+    <AuthContext.Provider value={{ user, role, loading, logout }}>
+      {children}
     </AuthContext.Provider>
   );
 };

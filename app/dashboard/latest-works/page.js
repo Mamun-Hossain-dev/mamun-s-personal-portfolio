@@ -1,0 +1,137 @@
+"use client";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import WorkForm from "@/components/dashboard/WorkForm";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/lib/firebase/config";
+import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
+
+export default function LatestWorksPage() {
+  const [works, setWorks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedWork, setSelectedWork] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    fetchWorks();
+  }, []);
+
+  const fetchWorks = async () => {
+    setLoading(true);
+    try {
+      const querySnapshot = await getDocs(collection(db, "latest_works"));
+      const worksList = [];
+      querySnapshot.forEach((doc) => {
+        worksList.push({ id: doc.id, ...doc.data() });
+      });
+      setWorks(worksList);
+    } catch (error) {
+      console.error("Error fetching latest works:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (confirm("Are you sure you want to delete this work?")) {
+      try {
+        await deleteDoc(doc(db, "latest_works", id));
+        fetchWorks();
+      } catch (error) {
+        console.error("Error deleting work:", error);
+      }
+    }
+  };
+
+  const handleEdit = (work) => {
+    setSelectedWork(work);
+    setShowForm(true);
+  };
+
+  const handleFormClose = () => {
+    setShowForm(false);
+    setSelectedWork(null);
+  };
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Latest Works</h1>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setShowForm(true)}
+          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+        >
+          Add New Work
+        </motion.button>
+      </div>
+
+      {showForm && (
+        <WorkForm
+          work={selectedWork}
+          onClose={handleFormClose}
+          onSuccess={fetchWorks}
+        />
+      )}
+
+      {loading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {works.map((work) => (
+            <div
+              key={work.id}
+              className="bg-white rounded-xl shadow-sm overflow-hidden"
+            >
+              {work.imageUrl ? (
+                <img
+                  src={work.imageUrl}
+                  alt={work.title}
+                  className="w-full h-48 object-cover"
+                />
+              ) : (
+                <div className="bg-gray-200 border-2 border-dashed w-full h-48" />
+              )}
+              <div className="p-4">
+                <h3 className="font-semibold text-lg mb-1">{work.title}</h3>
+                <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                  {work.description}
+                </p>
+                <div className="flex justify-between items-center">
+                  <a
+                    href={work.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-600 hover:text-purple-800 text-sm"
+                  >
+                    View Project
+                  </a>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleEdit(work)}
+                      className="text-blue-500 hover:text-blue-700"
+                    >
+                      <PencilIcon className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(work.id)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      <TrashIcon className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {!loading && works.length === 0 && (
+        <div className="text-center py-8 text-gray-500">No works found</div>
+      )}
+    </div>
+  );
+}
