@@ -4,6 +4,7 @@ import { useAuth } from "../../AuthContext";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Topbar from "@/components/dashboard/Topbar";
 import { useEffect } from "react";
+import Script from "next/script";
 
 export default function DashboardLayout({ children }) {
   const { user, role, loading } = useAuth();
@@ -24,14 +25,34 @@ export default function DashboardLayout({ children }) {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <Topbar user={user} />
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
-          {children}
-        </main>
+    <>
+      {typeof window !== "undefined" &&
+        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+            strategy="afterInteractive"
+          />
+        )}
+      {typeof window !== "undefined" &&
+        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+          `}
+          </Script>
+        )}
+      <div className="flex h-screen bg-gray-50">
+        <Sidebar />
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <Topbar user={user} />
+          <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

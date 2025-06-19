@@ -6,6 +6,8 @@ import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { registerWithEmail, signInWithGoogle } from "@/lib/firebaseRegister";
 import { useRouter } from "next/navigation";
+import { db } from "@/config/firebase.config";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +20,7 @@ export default function RegisterPage() {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [firestoreError, setFirestoreError] = useState("");
   const router = useRouter();
 
   const handleInputChange = (e) => {
@@ -64,12 +67,14 @@ export default function RegisterPage() {
     if (!validateForm()) return;
 
     setLoading(true);
+    setFirestoreError("");
     try {
       await registerWithEmail(formData.name, formData.email, formData.password);
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
-      console.error("Registration error:", error.message);
-      alert(`Registration failed: ${error.message}`);
+      setFirestoreError(
+        error.message || "Registration failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -77,12 +82,14 @@ export default function RegisterPage() {
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
+    setFirestoreError("");
     try {
       await signInWithGoogle();
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
-      console.error("Google Sign-In Error:", error.message);
-      alert(`Google sign-in failed: ${error.message}`);
+      setFirestoreError(
+        error.message || "Google sign-in failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -105,6 +112,12 @@ export default function RegisterPage() {
               Create Account
             </h1>
           </div>
+
+          {firestoreError && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+              {firestoreError}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>

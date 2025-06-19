@@ -6,6 +6,8 @@ import { Mail, Lock, Eye, EyeOff, ArrowLeft, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { signInWithEmail, signInWithGoogle } from "@/lib/firebaseRegister";
 import { useRouter } from "next/navigation";
+import { db } from "@/config/firebase.config";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +18,7 @@ export default function LoginPage() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [firestoreError, setFirestoreError] = useState("");
   const router = useRouter();
 
   // Clear error messages when user starts typing
@@ -71,30 +74,13 @@ export default function LoginPage() {
 
     setLoading(true);
     setErrorMessage("");
+    setFirestoreError("");
 
     try {
       await signInWithEmail(formData.email, formData.password);
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
-      console.error("Login error:", error.message);
-
-      // Handle specific Firebase errors
-      switch (error.code) {
-        case "auth/user-not-found":
-          setErrorMessage("No account found with this email address");
-          break;
-        case "auth/wrong-password":
-          setErrorMessage("Incorrect password. Please try again");
-          break;
-        case "auth/too-many-requests":
-          setErrorMessage("Too many attempts. Account temporarily locked");
-          break;
-        case "auth/user-disabled":
-          setErrorMessage("This account has been disabled");
-          break;
-        default:
-          setErrorMessage("Login failed. Please try again");
-      }
+      setFirestoreError(error.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -103,24 +89,15 @@ export default function LoginPage() {
   const handleGoogleSignIn = async () => {
     setLoading(true);
     setErrorMessage("");
+    setFirestoreError("");
 
     try {
       await signInWithGoogle();
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
-      console.error("Google Sign-In Error:", error.message);
-
-      // Handle specific Google sign-in errors
-      switch (error.code) {
-        case "auth/account-exists-with-different-credential":
-          setErrorMessage("An account already exists with this email");
-          break;
-        case "auth/popup-closed-by-user":
-          setErrorMessage("Sign-in popup was closed before completing");
-          break;
-        default:
-          setErrorMessage("Google sign-in failed. Please try again");
-      }
+      setFirestoreError(
+        error.message || "Google sign-in failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -151,6 +128,12 @@ export default function LoginPage() {
                 &times;
               </button>
             </motion.div>
+          )}
+
+          {firestoreError && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+              {firestoreError}
+            </div>
           )}
 
           <div className="flex items-center mb-6">

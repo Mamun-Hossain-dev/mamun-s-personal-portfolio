@@ -3,10 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/AuthContext";
+import { useRouter } from "next/navigation";
+import { User as UserIcon, LogOut } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, role, logout } = useAuth();
+  const router = useRouter();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -114,30 +120,80 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <Link href="/register">
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  backgroundPosition: "100% 0",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="px-5 py-2 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all"
-              >
-                Register
-              </motion.button>
-            </Link>
-            <Link href="/login">
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  backgroundPosition: "100% 0",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="px-5 py-2 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom"
-              >
-                Login
-              </motion.button>
-            </Link>
+            {user ? (
+              <>
+                <div className="relative">
+                  <button
+                    onClick={() => setProfileOpen((v) => !v)}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/15 focus:outline-none"
+                  >
+                    <UserIcon size={22} />
+                  </button>
+                  {profileOpen && (
+                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-50 p-4 text-gray-800">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold">
+                          {user.displayName?.[0] || user.email?.[0] || "U"}
+                        </div>
+                        <div>
+                          <div className="font-semibold">
+                            {user.displayName || user.email}
+                          </div>
+                          <div className="text-xs text-gray-500">{role}</div>
+                        </div>
+                      </div>
+                      {role === "admin" && (
+                        <button
+                          onClick={() => {
+                            setProfileOpen(false);
+                            router.push("/dashboard");
+                          }}
+                          className="block w-full text-left px-4 py-2 rounded hover:bg-purple-100 text-purple-700 mb-2"
+                        >
+                          Admin Dashboard
+                        </button>
+                      )}
+                      <button
+                        onClick={() => {
+                          setProfileOpen(false);
+                          logout();
+                        }}
+                        className="block w-full text-left px-4 py-2 rounded hover:bg-red-100 text-red-700 flex items-center"
+                      >
+                        <LogOut size={16} className="mr-2" /> Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <Link href="/register">
+                  <motion.button
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundPosition: "100% 0",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-5 py-2 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all"
+                  >
+                    Register
+                  </motion.button>
+                </Link>
+                <Link href="/login">
+                  <motion.button
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundPosition: "100% 0",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-5 py-2 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom"
+                  >
+                    Login
+                  </motion.button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Auth Button - Visible only on mobile */}
