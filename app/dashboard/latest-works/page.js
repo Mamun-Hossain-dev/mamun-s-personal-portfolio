@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import WorkForm from "@/components/dashboard/WorkForm";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "@/lib/firebase/config";
-import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { db } from "@/config/firebase.config";
+import { Trash2, Pencil } from "lucide-react";
 
 export default function LatestWorksPage() {
   const [works, setWorks] = useState([]);
@@ -114,13 +114,13 @@ export default function LatestWorksPage() {
                       onClick={() => handleEdit(work)}
                       className="text-blue-500 hover:text-blue-700"
                     >
-                      <PencilIcon className="h-5 w-5" />
+                      <Pencil className="h-5 w-5" />
                     </button>
                     <button
                       onClick={() => handleDelete(work.id)}
                       className="text-red-500 hover:text-red-700"
                     >
-                      <TrashIcon className="h-5 w-5" />
+                      <Trash2 className="h-5 w-5" />
                     </button>
                   </div>
                 </div>

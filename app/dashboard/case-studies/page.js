@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import CaseStudyForm from "@/components/dashboard/CaseStudyForm";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "@/lib/firebase/config";
-import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { db } from "@/config/firebase.config";
+import { Trash2, Pencil } from "lucide-react";
 
 export default function CaseStudiesPage() {
   const [caseStudies, setCaseStudies] = useState([]);
@@ -130,13 +130,13 @@ export default function CaseStudiesPage() {
                         onClick={() => handleEdit(study)}
                         className="text-blue-500 hover:text-blue-700"
                       >
-                        <PencilIcon className="h-5 w-5" />
+                        <Pencil className="h-5 w-5" />
                       </button>
                       <button
                         onClick={() => handleDelete(study.id)}
                         className="text-red-500 hover:text-red-700"
                       >
-                        <TrashIcon className="h-5 w-5" />
+                        <Trash2 className="h-5 w-5" />
                       </button>
                     </div>
                   </td>

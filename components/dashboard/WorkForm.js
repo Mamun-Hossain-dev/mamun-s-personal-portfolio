@@ -1,10 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "@/lib/firebase/config";
-import { v4 as uuidv4 } from "uuid";
+import { db, storage } from "@/config/firebase.config";
+
+// Helper function to generate a unique ID
+const generateUniqueId = () => {
+  const timestamp = Date.now().toString(36);
+  const randomStr = Math.random().toString(36).substring(2, 8);
+  return `${timestamp}-${randomStr}`;
+};
 
 export default function WorkForm({ work, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
@@ -53,9 +59,10 @@ export default function WorkForm({ work, onClose, onSuccess }) {
 
       // Upload new image if selected
       if (formData.imageFile) {
+        const uniqueId = generateUniqueId();
         const storageRef = ref(
           storage,
-          `latest-works/${uuidv4()}-${formData.imageFile.name}`
+          `latest-works/${uniqueId}-${formData.imageFile.name}`
         );
         await uploadBytes(storageRef, formData.imageFile);
         imageUrl = await getDownloadURL(storageRef);
@@ -66,7 +73,7 @@ export default function WorkForm({ work, onClose, onSuccess }) {
         description: formData.description,
         link: formData.link,
         imageUrl,
-        createdAt: new Date(),
+        createdAt: Timestamp.now(),
       };
 
       // Update or create document
@@ -75,7 +82,8 @@ export default function WorkForm({ work, onClose, onSuccess }) {
           merge: true,
         });
       } else {
-        await setDoc(doc(db, "latest_works", uuidv4()), workData);
+        const uniqueId = generateUniqueId();
+        await setDoc(doc(db, "latest_works", uniqueId), workData);
       }
 
       onSuccess();
@@ -160,12 +168,14 @@ export default function WorkForm({ work, onClose, onSuccess }) {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Image
             </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full"
-            />
+            <div className="relative">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 text-gray-700 bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+              />
+            </div>
             {formData.imageUrl && !formData.imageFile && (
               <div className="mt-2">
                 <img
