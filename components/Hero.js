@@ -84,26 +84,25 @@ const Hero = memo(() => {
   }, []);
 
   const socialLinks = [
-    { icon: <Github size={24} />, url: "https://github.com", label: "GitHub" },
+    {
+      icon: <Facebook size={24} />,
+      url: "https://www.facebook.com/MdTanjilHossaiin/",
+      label: "Facebook",
+    },
     {
       icon: <Linkedin size={24} />,
-      url: "https://linkedin.com",
+      url: "https://www.linkedin.com/in/mdtanjilhossaiin/",
       label: "LinkedIn",
     },
     {
       icon: <Twitter size={24} />,
-      url: "https://twitter.com",
+      url: "https://x.com/mdtanjilhosain",
       label: "Twitter",
     },
     {
       icon: <Instagram size={24} />,
-      url: "https://instagram.com",
+      url: "https://www.instagram.com/mdtanjilhossaiin/",
       label: "Instagram",
-    },
-    {
-      icon: <Mail size={24} />,
-      url: "mailto:alex@example.com",
-      label: "Email",
     },
   ];
 
@@ -180,28 +179,7 @@ const Hero = memo(() => {
               className="mt-10 flex justify-center lg:justify-start gap-6"
               variants={itemVariants}
             >
-              {[
-                {
-                  icon: <Linkedin size={28} />,
-                  url: "https://linkedin.com",
-                  label: "LinkedIn",
-                },
-                {
-                  icon: <Instagram size={28} />,
-                  url: "https://instagram.com",
-                  label: "Instagram",
-                },
-                {
-                  icon: <Facebook size={28} />,
-                  url: "https://facebook.com",
-                  label: "Facebook",
-                },
-                {
-                  icon: <Twitter size={28} />,
-                  url: "https://twitter.com",
-                  label: "Twitter",
-                },
-              ].map((social, idx) => (
+              {socialLinks.map((social, idx) => (
                 <motion.a
                   key={social.label}
                   href={social.url}

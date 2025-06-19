@@ -2,31 +2,35 @@
 
 import { motion } from "framer-motion";
 import {
-  Github,
   Linkedin,
   Twitter,
   Instagram,
   Mail,
   Phone,
   MapPin,
+  Facebook,
 } from "lucide-react";
 
 const Footer = () => {
   const socialLinks = [
-    { icon: <Github size={24} />, url: "https://github.com", label: "GitHub" },
+    {
+      icon: <Facebook size={24} />,
+      url: "https://www.facebook.com/MdTanjilHossaiin/",
+      label: "Facebook",
+    },
     {
       icon: <Linkedin size={24} />,
-      url: "https://linkedin.com",
+      url: "https://www.linkedin.com/in/mdtanjilhossaiin/",
       label: "LinkedIn",
     },
     {
       icon: <Twitter size={24} />,
-      url: "https://twitter.com",
+      url: "https://x.com/mdtanjilhosain",
       label: "Twitter",
     },
     {
       icon: <Instagram size={24} />,
-      url: "https://instagram.com",
+      url: "https://www.instagram.com/mdtanjilhossaiin/",
       label: "Instagram",
     },
   ];

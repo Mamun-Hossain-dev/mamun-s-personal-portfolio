@@ -119,20 +119,25 @@ const ContactSection = () => {
   const socialLinks = [
     {
       icon: Facebook,
-      href: "https://www.facebook.com/profile.php?id=61575251046929",
+      href: "https://www.facebook.com/MdTanjilHossaiin/",
       label: "Facebook",
       color: "hover:text-blue-500",
     },
-    { icon: Twitter, href: "#", label: "Twitter", color: "hover:text-sky-400" },
+    {
+      icon: Twitter,
+      href: "https://x.com/mdtanjilhosain",
+      label: "Twitter",
+      color: "hover:text-sky-400",
+    },
     {
       icon: Instagram,
-      href: "https://www.instagram.com/upskilldigitalagency/?igsh=cXNrN2UyZnBkbXhp#",
+      href: "https://www.instagram.com/mdtanjilhossaiin/",
       label: "Instagram",
       color: "hover:text-pink-500",
     },
     {
       icon: Linkedin,
-      href: "https://www.linkedin.com/company/upskill-it-institute-digital-agency/posts/?feedView=all",
+      href: "https://www.linkedin.com/in/mdtanjilhossaiin/",
       label: "LinkedIn",
       color: "hover:text-blue-600",
     },
