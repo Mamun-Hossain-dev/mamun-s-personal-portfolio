@@ -1,9 +1,11 @@
 // src/app/login/page.js
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mail, Lock, Eye, EyeOff, ArrowLeft, Github } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowLeft, AlertCircle } from "lucide-react";
 import Link from "next/link";
+import { signInWithEmail, signInWithGoogle } from "@/lib/firebaseRegister";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +14,19 @@ export default function LoginPage() {
     password: "",
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
+
+  // Clear error messages when user starts typing
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,33 +35,94 @@ export default function LoginPage() {
       [name]: value,
     }));
 
+    // Clear field-specific error when typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
+
+    // Clear general error message
+    if (errorMessage) setErrorMessage("");
   };
 
   const validateForm = () => {
     const newErrors = {};
+    let isValid = true;
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
+      isValid = false;
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
+      isValid = false;
     }
 
     if (!formData.password) {
       newErrors.password = "Password is required";
+      isValid = false;
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Login logic will go here
-      console.log("Form submitted:", formData);
+    if (!validateForm()) return;
+
+    setLoading(true);
+    setErrorMessage("");
+
+    try {
+      await signInWithEmail(formData.email, formData.password);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Login error:", error.message);
+
+      // Handle specific Firebase errors
+      switch (error.code) {
+        case "auth/user-not-found":
+          setErrorMessage("No account found with this email address");
+          break;
+        case "auth/wrong-password":
+          setErrorMessage("Incorrect password. Please try again");
+          break;
+        case "auth/too-many-requests":
+          setErrorMessage("Too many attempts. Account temporarily locked");
+          break;
+        case "auth/user-disabled":
+          setErrorMessage("This account has been disabled");
+          break;
+        default:
+          setErrorMessage("Login failed. Please try again");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setErrorMessage("");
+
+    try {
+      await signInWithGoogle();
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.message);
+
+      // Handle specific Google sign-in errors
+      switch (error.code) {
+        case "auth/account-exists-with-different-credential":
+          setErrorMessage("An account already exists with this email");
+          break;
+        case "auth/popup-closed-by-user":
+          setErrorMessage("Sign-in popup was closed before completing");
+          break;
+        default:
+          setErrorMessage("Google sign-in failed. Please try again");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,8 +133,26 @@ export default function LoginPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-white/10 p-8 shadow-2xl"
+          className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-white/10 p-8 shadow-2xl relative"
         >
+          {/* Error Message Banner */}
+          {errorMessage && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="absolute -top-4 left-0 right-0 mx-4 bg-red-500/90 text-white rounded-lg py-3 px-4 flex items-start shadow-lg"
+            >
+              <AlertCircle className="flex-shrink-0 mt-0.5 mr-2" size={18} />
+              <span className="text-sm font-medium">{errorMessage}</span>
+              <button
+                onClick={() => setErrorMessage("")}
+                className="ml-auto text-white hover:text-gray-200"
+              >
+                &times;
+              </button>
+            </motion.div>
+          )}
+
           <div className="flex items-center mb-6">
             <Link href="/" className="text-gray-400 hover:text-white">
               <ArrowLeft size={20} />
@@ -90,7 +184,9 @@ export default function LoginPage() {
                 />
               </div>
               {errors.email && (
-                <p className="text-sm text-red-400 mt-1">{errors.email}</p>
+                <p className="text-sm text-red-400 mt-1 flex items-center">
+                  <AlertCircle className="mr-1" size={14} /> {errors.email}
+                </p>
               )}
             </div>
 
@@ -122,7 +218,9 @@ export default function LoginPage() {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-sm text-red-400 mt-1">{errors.password}</p>
+                <p className="text-sm text-red-400 mt-1 flex items-center">
+                  <AlertCircle className="mr-1" size={14} /> {errors.password}
+                </p>
               )}
             </div>
 
@@ -143,12 +241,12 @@ export default function LoginPage() {
               </div>
 
               <div className="text-sm">
-                <a
-                  href="#"
+                <Link
+                  href="/reset-password"
                   className="font-medium text-purple-400 hover:text-purple-300"
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -156,9 +254,33 @@ export default function LoginPage() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gradient-to-r hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 flex items-center justify-center"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gradient-to-r hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 flex items-center justify-center disabled:opacity-70"
             >
-              Sign in
+              {loading ? (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              ) : (
+                "Sign in"
+              )}
             </motion.button>
           </form>
 
@@ -172,7 +294,12 @@ export default function LoginPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4">
-              <button className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2.5 px-4 rounded-lg font-medium flex items-center justify-center transition-all duration-200">
+              <button
+                onClick={handleGoogleSignIn}
+                type="button"
+                disabled={loading}
+                className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2.5 px-4 rounded-lg font-medium flex items-center justify-center transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
                 <div className="bg-white rounded-full p-1 mr-3">
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path
@@ -199,7 +326,7 @@ export default function LoginPage() {
           </div>
 
           <p className="text-gray-400 text-center mt-6">
-            Dont have an account?{" "}
+            Do not have an account?{" "}
             <Link
               href="/register"
               className="text-purple-400 hover:text-purple-300 font-medium"

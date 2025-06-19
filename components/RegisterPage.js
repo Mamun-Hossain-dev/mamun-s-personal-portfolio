@@ -2,8 +2,10 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { User, Mail, Lock, Eye, EyeOff, ArrowLeft, Github } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { registerWithEmail, signInWithGoogle } from "@/lib/firebaseRegister";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,6 +17,8 @@ export default function RegisterPage() {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,11 +59,32 @@ export default function RegisterPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Registration logic will go here
-      console.log("Form submitted:", formData);
+    if (!validateForm()) return;
+
+    setLoading(true);
+    try {
+      await registerWithEmail(formData.name, formData.email, formData.password);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Registration error:", error.message);
+      alert(`Registration failed: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      await signInWithGoogle();
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.message);
+      alert(`Google sign-in failed: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -207,9 +232,33 @@ export default function RegisterPage() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gradient-to-r hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 flex items-center justify-center"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gradient-to-r hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 flex items-center justify-center disabled:opacity-70"
             >
-              Create Account
+              {loading ? (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              ) : (
+                "Create Account"
+              )}
             </motion.button>
           </form>
 
@@ -223,7 +272,12 @@ export default function RegisterPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4">
-              <button className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2.5 px-4 rounded-lg font-medium flex items-center justify-center transition-all duration-200">
+              <button
+                onClick={handleGoogleSignIn}
+                type="button"
+                disabled={loading}
+                className="w-full bg-gray-800 hover:bg-gray-700 text-white py-2.5 px-4 rounded-lg font-medium flex items-center justify-center transition-all duration-200 disabled:opacity-70"
+              >
                 <div className="bg-white rounded-full p-1 mr-3">
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path
