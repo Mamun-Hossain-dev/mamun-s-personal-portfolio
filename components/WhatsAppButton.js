@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const WhatsAppButton = () => {
   const handleWhatsAppClick = () => {
-    const phoneNumber = "+1234567890"; // Replace with your actual WhatsApp number
+    const phoneNumber = "+8801948873556";
     const message = "Hi! I'd like to discuss a project with you.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message

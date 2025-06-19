@@ -37,7 +37,7 @@ const About = () => {
           <div className="hidden md:block relative w-80 h-80 lg:w-[400px] lg:h-[400px] rounded-2xl overflow-hidden border-4 border-purple-500 shadow-2xl">
             <Image
               src="/images/Tanzilhossain.jpg"
-              alt="Tanzil Hossain"
+              alt="Tanjil Hossain"
               fill
               sizes="(max-width: 1024px) 320px, 400px"
               style={{ objectFit: "cover" }}
@@ -70,12 +70,12 @@ const About = () => {
             />
           </div>
           <p className="text-gray-300 text-lg mb-6">
-            I&apos;m Tanzil Hossain — an AI-powered, data-driven Digital
-            Marketer with 3 years of experience. I’ve worked with brands in
-            Bangladesh and abroad, driving growth through effective Facebook &
-            Google Ads, SEO, Email Marketing, and Web Analytics. My passion for
-            digital marketing is reflected in the results I deliver and the
-            strategic thinking I bring to every campaign. Im focused on
+            I&apos;m Tanjil Hossain, an AI-powered, data-driven digital marketer
+            based worldwide, helping businesses grow online. Ive worked with
+            brands in Bangladesh and abroad, driving growth through effective
+            Facebook & Google Ads, SEO, Email Marketing, and Web Analytics. My
+            passion for digital marketing is reflected in the results I deliver
+            and the strategic thinking I bring to every campaign. Im focused on
             measurable outcomes, blending creativity with data to help brands
             grow smarter.
           </p>

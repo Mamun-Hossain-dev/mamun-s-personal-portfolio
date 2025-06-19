@@ -137,7 +137,7 @@ const Hero = memo(() => {
             <motion.div variants={itemVariants}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500">
-                  I&apos;m Tanzil Hossain,
+                  I&apos;m Tanjil Hossain,
                 </span>
                 <span className="block mt-2 text-white">
                   Professional Digital Marketer
@@ -161,7 +161,7 @@ const Hero = memo(() => {
                 whileTap="tap"
                 onClick={handleConnectClick}
                 className="px-8 py-3.5 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom cursor-pointer"
-                aria-label="Connect with Tanzil Hossain"
+                aria-label="Connect with Tanjil Hossain"
               >
                 Connect with me
               </motion.button>
@@ -170,7 +170,7 @@ const Hero = memo(() => {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleResumeClick}
                 className="px-8 py-3.5 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all cursor-pointer"
-                aria-label="View Tanzil Hossain's resume"
+                aria-label="View Tanjil Hossain's resume"
               >
                 View Resume
               </motion.button>
@@ -228,7 +228,7 @@ const Hero = memo(() => {
                 <div className="absolute inset-0 rounded-full overflow-hidden">
                   <Image
                     src={"/images/Tanzilhossain.jpg"}
-                    alt="Tanzil Hossain - Digital Marketer"
+                    alt="Tanjil Hossain - Digital Marketer"
                     fill
                     sizes="(max-width: 768px) 100vw, 320px"
                     style={{ objectFit: "cover" }}

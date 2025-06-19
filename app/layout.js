@@ -3,7 +3,7 @@ import ClientLayout from "@/components/ClientLayout";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Tanzil Hossain - Portfolio",
+  title: "Tanjil Hossain - Portfolio",
   description: "Full Stack Developer & UI/UX Designer Portfolio",
 };
 

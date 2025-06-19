@@ -26,8 +26,8 @@ const ContactSection = () => {
   });
   const [errors, setErrors] = useState({});
 
-  // Replace with your Web3Forms access key
-  const WEB3FORMS_ACCESS_KEY = "f28ee327-2198-4f06-85f3-fafa4bd47ecb";
+  // Web3Forms access key
+  const WEB3FORMS_ACCESS_KEY = "9225e9ec-e066-43d4-8cfb-7dac8c1a57f5";
 
   const validateForm = () => {
     const newErrors = {};
@@ -66,7 +66,8 @@ const ContactSection = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!validateForm()) return;
 
     setIsLoading(true);
@@ -79,10 +80,6 @@ const ContactSection = () => {
       formDataToSend.append("email", formData.email);
       formDataToSend.append("service", formData.service || "Not specified");
       formDataToSend.append("message", formData.description);
-      formDataToSend.append(
-        "subject",
-        `New Contact Form Submission from ${formData.name}`
-      );
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -285,21 +282,7 @@ const ContactSection = () => {
           >
             <h2 className="text-3xl font-bold text-white mb-6">Get In Touch</h2>
 
-            {message.text && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`mb-6 p-4 rounded-lg ${
-                  message.type === "success"
-                    ? "bg-green-900/30 text-green-400 border border-green-500/30"
-                    : "bg-red-900/30 text-red-400 border border-red-500/30"
-                }`}
-              >
-                {message.text}
-              </motion.div>
-            )}
-
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <AnimatedInputField
                   icon={<User size={18} className="text-gray-400" />}
@@ -342,26 +325,20 @@ const ContactSection = () => {
                     <option value="" className="bg-gray-800">
                       Select a service (optional)
                     </option>
-                    <option value="web-development" className="bg-gray-800">
-                      Web Development
+                    <option value="facebook-marketing" className="bg-gray-800">
+                      Facebook Marketing
                     </option>
-                    <option value="graphic-design" className="bg-gray-800">
-                      Graphic Design
+                    <option value="google-marketing" className="bg-gray-800">
+                      Google Marketing
                     </option>
-                    <option value="seo" className="bg-gray-800">
-                      SEO
+                    <option value="web-analytics" className="bg-gray-800">
+                      Web Analytics
                     </option>
-                    <option value="digital-marketing" className="bg-gray-800">
-                      Digital Marketing
-                    </option>
-                    <option value="tech-solutions" className="bg-gray-800">
-                      Tech Solutions
-                    </option>
-                    <option value="consulting" className="bg-gray-800">
-                      Consulting
-                    </option>
-                    <option value="general" className="bg-gray-800">
-                      General Inquiry
+                    <option
+                      value="social-media-marketing"
+                      className="bg-gray-800"
+                    >
+                      Social Media Marketing
                     </option>
                   </select>
                   <Briefcase
@@ -404,8 +381,7 @@ const ContactSection = () => {
               </div>
 
               <motion.button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 disabled={isLoading}
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gradient-to-r hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 whileHover={{ scale: 1.02 }}
@@ -426,7 +402,18 @@ const ContactSection = () => {
                   </div>
                 )}
               </motion.button>
-            </div>
+            </form>
+
+            {/* Success/Error Message */}
+            {message.text && (
+              <div
+                className={`mt-6 text-center text-base font-medium ${
+                  message.type === "success" ? "text-green-400" : "text-red-400"
+                }`}
+              >
+                {message.text}
+              </div>
+            )}
           </motion.div>
         </div>
       </div>

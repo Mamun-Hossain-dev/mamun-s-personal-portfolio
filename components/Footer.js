@@ -81,12 +81,12 @@ const Footer = () => {
             >
               <div className="bg-gray-900 p-2 rounded-md">
                 <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
-                  Tanzil Hossain
+                  Tanjil Hossain
                 </h2>
               </div>
             </motion.div>
             <p className="mt-4 text-gray-400 max-w-xs">
-              I&apos;m Tanzil Hossain, an AI-powered, data-driven digital
+              I&apos;m Tanjil Hossain, an AI-powered, data-driven digital
               marketer based worldwide, helping businesses grow online.
             </p>
 
@@ -203,25 +203,29 @@ const Footer = () => {
         />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Alex Bennett. All rights reserved.
+        <div className="flex flex-col md:flex-row justify-between items-center mt-10">
+          <p className="text-gray-500 text-sm mb-4 md:mb-0">
+            © 2025 Tanjil Hossain. All rights reserved.
           </p>
-
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            {["Terms", "Privacy", "Cookies"].map((item, index) => (
-              <motion.a
-                key={item}
-                href="#"
-                className="text-gray-500 hover:text-white text-sm transition-colors"
-                whileHover={{ y: -2 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 * index + 0.5 }}
-              >
-                {item}
-              </motion.a>
-            ))}
+          <div className="flex flex-wrap gap-6 items-center">
+            <a
+              href="#"
+              className="text-gray-500 hover:text-white text-sm transition-colors"
+            >
+              Term of Services
+            </a>
+            <a
+              href="#"
+              className="text-gray-500 hover:text-white text-sm transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/contact"
+              className="text-gray-500 hover:text-white text-sm transition-colors"
+            >
+              Connect with me
+            </a>
           </div>
         </div>
       </div>
