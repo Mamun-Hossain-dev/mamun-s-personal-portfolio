@@ -41,9 +41,11 @@ const Footer = () => {
       icon: (
         <Image
           src="/images/mail_icon.svg"
-          alt="mail icon"
-          width={24}
-          height={24}
+          alt="Mail Icon"
+          width={20}
+          height={20}
+          style={{ width: 20, height: "auto" }}
+          className="inline-block mr-2"
         />
       ),
       text: "Tanjildigital@gmail.com",
@@ -63,9 +65,11 @@ const Footer = () => {
       icon: (
         <Image
           src="/images/location_icon.svg"
-          alt="location icon"
-          width={24}
-          height={24}
+          alt="Location Icon"
+          width={20}
+          height={20}
+          style={{ width: 20, height: "auto" }}
+          className="inline-block mr-2"
         />
       ),
       text: "Dhaka, Bangladesh",

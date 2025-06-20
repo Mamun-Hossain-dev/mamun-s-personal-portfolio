@@ -111,6 +111,7 @@ export default function LatestWorksPage() {
                   alt={work.title}
                   width={400}
                   height={192}
+                  style={{ width: 400, height: "auto" }}
                   className="w-full h-48 object-cover"
                 />
               ) : (

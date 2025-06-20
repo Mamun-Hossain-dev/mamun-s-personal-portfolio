@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -8,18 +9,19 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Tag } from "lucide-react";
 
 export default function CaseStudyDetailPage({ params }) {
+  const actualParams = React.use(params);
   const [caseStudy, setCaseStudy] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (params.id) {
+    if (actualParams.id) {
       const fetchCaseStudy = async () => {
         setLoading(true);
         setError(null);
         try {
-          const docRef = doc(db, "case_studies", params.id);
+          const docRef = doc(db, "case_studies", actualParams.id);
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
@@ -37,7 +39,7 @@ export default function CaseStudyDetailPage({ params }) {
 
       fetchCaseStudy();
     }
-  }, [params.id]);
+  }, [actualParams.id]);
 
   if (loading) {
     return (

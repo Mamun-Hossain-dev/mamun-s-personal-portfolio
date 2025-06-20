@@ -205,12 +205,11 @@ const Hero = memo(() => {
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-transparent bg-gradient-to-br from-purple-500 to-pink-500 p-1">
                 <div className="absolute inset-0 rounded-full overflow-hidden">
                   <Image
-                    src={"/images/Tanzilhossain.jpg"}
-                    alt="Tanjil Hossain - Digital Marketer"
+                    src="/images/Tanzilhossain.jpg"
+                    alt="Tanjil Hossain"
                     fill
-                    sizes="(max-width: 768px) 100vw, 320px"
-                    style={{ objectFit: "cover" }}
-                    className="scale-105"
+                    sizes="(max-width: 1024px) 320px, 400px"
+                    className="w-full h-full object-cover rounded-full shadow-lg"
                     priority
                   />
                 </div>

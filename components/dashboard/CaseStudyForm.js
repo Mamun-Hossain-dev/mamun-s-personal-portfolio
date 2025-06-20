@@ -55,13 +55,27 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
         useWebWorker: true,
       };
       const compressedFile = await imageCompression(file, options);
+      // Upload to Cloudinary
+      const formData = new FormData();
+      formData.append("file", compressedFile);
+      formData.append("upload_preset", "unsigned_preset");
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dlcpaiziv/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await res.json();
+      if (!data.secure_url) throw new Error("Cloudinary upload failed");
       setFormData((prev) => ({
         ...prev,
-        imageFile: compressedFile,
+        imageFile: null,
+        imageUrl: data.secure_url,
       }));
     } catch (error) {
-      console.error("Image compression error:", error);
-      setError("Failed to compress image. Please try a different file.");
+      console.error("Image upload error:", error);
+      setError("Failed to upload image. Please try a different file.");
       setFormData((prev) => ({ ...prev, imageFile: null }));
     } finally {
       setIsCompressing(false);
@@ -74,19 +88,6 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
     setError("");
 
     try {
-      let imageUrl = formData.imageUrl;
-
-      // Upload new image if selected
-      if (formData.imageFile) {
-        const uniqueId = generateUniqueId();
-        const storageRef = ref(
-          storage,
-          `case-studies/${uniqueId}-${formData.imageFile.name}`
-        );
-        await uploadBytes(storageRef, formData.imageFile);
-        imageUrl = await getDownloadURL(storageRef);
-      }
-
       const caseStudyData = {
         title: formData.title,
         description: formData.description,
@@ -94,7 +95,7 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
           .split(",")
           .map((tag) => tag.trim())
           .filter((tag) => tag),
-        imageUrl,
+        imageUrl: formData.imageUrl,
         createdAt: Timestamp.now(),
       };
 
@@ -201,6 +202,7 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
                   alt="Preview"
                   width={320}
                   height={240}
+                  style={{ width: 320, height: "auto" }}
                   className="max-w-xs h-auto rounded-lg"
                 />
               </div>

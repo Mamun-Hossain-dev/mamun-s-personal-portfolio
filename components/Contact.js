@@ -158,6 +158,7 @@ const ContactSection = () => {
           alt="call icon"
           width={24}
           height={24}
+          style={{ width: 24, height: "auto" }}
           className="inline"
         />
       ),
