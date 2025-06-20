@@ -52,8 +52,10 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">
-          Dashboard Overview
+        <h1 className="text-3xl font-bold mb-6">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+            Dashboard Overview
+          </span>
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -80,8 +82,10 @@ export default function DashboardPage() {
 
       {/* Analytics Dashboard */}
       <div>
-        <h2 className="text-xl font-bold text-gray-800 mb-6">
-          Analytics Insights
+        <h2 className="text-3xl font-bold mb-6">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+            Analytics Insights
+          </span>
         </h2>
         <AnalyticsDashboard />
       </div>

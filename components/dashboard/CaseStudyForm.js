@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import imageCompression from "browser-image-compression";
 import { doc, setDoc, collection, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/config/firebase.config";
@@ -23,6 +24,7 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isCompressing, setIsCompressing] = useState(false);
 
   useEffect(() => {
     if (caseStudy) {
@@ -41,12 +43,28 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setIsCompressing(true);
+    try {
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      const compressedFile = await imageCompression(file, options);
       setFormData((prev) => ({
         ...prev,
-        imageFile: e.target.files[0],
+        imageFile: compressedFile,
       }));
+    } catch (error) {
+      console.error("Image compression error:", error);
+      setError("Failed to compress image. Please try a different file.");
+      setFormData((prev) => ({ ...prev, imageFile: null }));
+    } finally {
+      setIsCompressing(false);
     }
   };
 
@@ -105,29 +123,26 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white rounded-xl shadow-lg p-6 w-full max-w-2xl"
+        className="bg-gray-800 rounded-xl shadow-lg p-6 w-full max-w-2xl text-white"
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">
+          <h2 className="text-xl font-bold text-white">
             {caseStudy ? "Edit Case Study" : "Add New Case Study"}
           </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-white">
             &times;
           </button>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+          <div className="mb-4 p-3 bg-red-900/50 text-red-300 rounded-lg border border-red-500/50">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
               Title
             </label>
             <input
@@ -136,12 +151,12 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
               value={formData.title}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500"
+              className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-purple-500 focus:border-purple-500 bg-gray-700 text-white"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
               Description
             </label>
             <textarea
@@ -150,12 +165,12 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
               onChange={handleChange}
               required
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500"
+              className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-purple-500 focus:border-purple-500 bg-gray-700 text-white"
             ></textarea>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
               Tags (comma separated)
             </label>
             <input
@@ -163,12 +178,12 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
               name="tags"
               value={formData.tags}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500"
+              className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-purple-500 focus:border-purple-500 bg-gray-700 text-white"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
               Image
             </label>
             <div className="relative">
@@ -176,7 +191,7 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 text-gray-700 bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+                className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-purple-300 hover:file:bg-gray-600"
               />
             </div>
             {formData.imageUrl && !formData.imageFile && (
@@ -197,16 +212,20 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100"
+              className="px-4 py-2 text-gray-300 border border-gray-600 rounded-lg hover:bg-gray-700"
             >
               Cancel
             </button>
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || isCompressing}
               className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
             >
-              {loading ? "Saving..." : "Save"}
+              {isCompressing
+                ? "Compressing..."
+                : loading
+                ? "Saving..."
+                : "Save"}
             </button>
           </div>
         </form>

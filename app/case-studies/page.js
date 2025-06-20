@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
@@ -105,9 +106,10 @@ export default function CaseStudiesPage() {
                       .map((tag) => tag.trim())
                       .filter(Boolean);
                 return (
-                  <div
+                  <Link
                     key={study.id}
-                    className="bg-white/10 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-white/10 backdrop-blur-md"
+                    href={`/case-studies/${study.id}`}
+                    className="block bg-white/10 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-white/10 backdrop-blur-md"
                   >
                     {study.imageUrl ? (
                       <Image
@@ -154,7 +156,7 @@ export default function CaseStudiesPage() {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>

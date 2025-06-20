@@ -116,15 +116,17 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white p-6 rounded-xl shadow-sm"
+          className="bg-gray-800 p-6 rounded-xl shadow-sm"
         >
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-purple-100 rounded-lg">
-              <Users className="w-6 h-6 text-purple-600" />
+            <div className="p-3 bg-purple-500/10 rounded-lg">
+              <Users className="w-6 h-6 text-purple-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Active Users</p>
-              <p className="text-2xl font-bold">{analyticsData.activeUsers}</p>
+              <p className="text-sm text-gray-400">Active Users</p>
+              <p className="text-2xl font-bold text-white">
+                {analyticsData.activeUsers}
+              </p>
             </div>
           </div>
         </motion.div>
@@ -133,15 +135,17 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white p-6 rounded-xl shadow-sm"
+          className="bg-gray-800 p-6 rounded-xl shadow-sm"
         >
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-pink-100 rounded-lg">
-              <Globe className="w-6 h-6 text-pink-600" />
+            <div className="p-3 bg-pink-500/10 rounded-lg">
+              <Globe className="w-6 h-6 text-pink-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Page Views</p>
-              <p className="text-2xl font-bold">{analyticsData.pageViews}</p>
+              <p className="text-sm text-gray-400">Page Views</p>
+              <p className="text-2xl font-bold text-white">
+                {analyticsData.pageViews}
+              </p>
             </div>
           </div>
         </motion.div>
@@ -150,15 +154,15 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white p-6 rounded-xl shadow-sm"
+          className="bg-gray-800 p-6 rounded-xl shadow-sm"
         >
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <Clock className="w-6 h-6 text-blue-600" />
+            <div className="p-3 bg-blue-500/10 rounded-lg">
+              <Clock className="w-6 h-6 text-blue-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Avg. Session</p>
-              <p className="text-2xl font-bold">
+              <p className="text-sm text-gray-400">Avg. Session</p>
+              <p className="text-2xl font-bold text-white">
                 {formatSessionDuration(analyticsData.avgSessionDuration)}
               </p>
             </div>
@@ -169,15 +173,15 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white p-6 rounded-xl shadow-sm"
+          className="bg-gray-800 p-6 rounded-xl shadow-sm"
         >
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-green-100 rounded-lg">
-              <MapPin className="w-6 h-6 text-green-600" />
+            <div className="p-3 bg-green-500/10 rounded-lg">
+              <MapPin className="w-6 h-6 text-green-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Top Location</p>
-              <p className="text-2xl font-bold">
+              <p className="text-sm text-gray-400">Top Location</p>
+              <p className="text-2xl font-bold text-white">
                 {analyticsData.topLocations[0]?.name || "N/A"}
               </p>
             </div>
@@ -186,15 +190,17 @@ const AnalyticsDashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Location Distribution */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white p-6 rounded-xl shadow-sm"
+          className="bg-gray-800 p-6 rounded-xl shadow-sm"
         >
-          <h3 className="text-lg font-semibold mb-4">Location Distribution</h3>
+          <h3 className="text-lg font-semibold mb-4 text-white">
+            Location Distribution
+          </h3>
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -206,7 +212,7 @@ const AnalyticsDashboard = () => {
                   cy="50%"
                   outerRadius={80}
                   fill="#8884d8"
-                  label={(entry) => entry.name}
+                  label={{ fill: "#fff" }}
                 >
                   {analyticsData.topLocations.map((entry, index) => (
                     <Cell
@@ -226,9 +232,11 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white p-6 rounded-xl shadow-sm"
+          className="bg-gray-800 p-6 rounded-xl shadow-sm"
         >
-          <h3 className="text-lg font-semibold mb-4">Device Usage</h3>
+          <h3 className="text-lg font-semibold mb-4 text-white">
+            Device Usage
+          </h3>
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -240,7 +248,7 @@ const AnalyticsDashboard = () => {
                   cy="50%"
                   outerRadius={80}
                   fill="#8884d8"
-                  label={(entry) => entry.name}
+                  label={{ fill: "#fff" }}
                 >
                   {analyticsData.deviceUsage.map((entry, index) => (
                     <Cell
@@ -260,19 +268,31 @@ const AnalyticsDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="bg-white p-6 rounded-xl shadow-sm col-span-2"
+          className="bg-gray-800 p-6 rounded-xl shadow-sm"
         >
-          <h3 className="text-lg font-semibold mb-4">Traffic Sources</h3>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={analyticsData.trafficSources}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#8B5CF6" />
-              </BarChart>
-            </ResponsiveContainer>
+          <h3 className="text-lg font-semibold mb-4 text-white">
+            Traffic Sources
+          </h3>
+          <div className="space-y-4">
+            {analyticsData.trafficSources.map((source, index) => (
+              <div key={index}>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-gray-300">{source.name}</span>
+                  <span className="font-semibold text-white">
+                    {source.value}%
+                  </span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-2.5">
+                  <div
+                    className="h-2.5 rounded-full"
+                    style={{
+                      width: `${source.value}%`,
+                      backgroundColor: COLORS[index % COLORS.length],
+                    }}
+                  ></div>
+                </div>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

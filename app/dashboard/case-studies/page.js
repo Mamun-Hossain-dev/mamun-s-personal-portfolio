@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import CaseStudyForm from "@/components/dashboard/CaseStudyForm";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "@/config/firebase.config";
+import { db, storage } from "@/config/firebase.config";
+import { ref, deleteObject } from "firebase/storage";
 import { Trash2, Pencil } from "lucide-react";
 
 export default function CaseStudiesPage() {
@@ -11,6 +13,7 @@ export default function CaseStudiesPage() {
   const [loading, setLoading] = useState(true);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchCaseStudies();
@@ -18,6 +21,7 @@ export default function CaseStudiesPage() {
 
   const fetchCaseStudies = async () => {
     setLoading(true);
+    setError(null);
     try {
       const querySnapshot = await getDocs(collection(db, "case_studies"));
       const studies = [];
@@ -27,18 +31,31 @@ export default function CaseStudiesPage() {
       setCaseStudies(studies);
     } catch (error) {
       console.error("Error fetching case studies:", error);
+      setError("Failed to load case studies. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (study) => {
     if (confirm("Are you sure you want to delete this case study?")) {
       try {
-        await deleteDoc(doc(db, "case_studies", id));
+        // Delete image from storage if it exists
+        if (study.imageUrl) {
+          const imageRef = ref(storage, study.imageUrl);
+          await deleteObject(imageRef);
+        }
+        // Delete firestore document
+        await deleteDoc(doc(db, "case_studies", study.id));
         fetchCaseStudies();
       } catch (error) {
-        console.error("Error deleting case study:", error);
+        if (error.code === "storage/object-not-found") {
+          console.warn("Image not found in storage, deleting document anyway.");
+          await deleteDoc(doc(db, "case_studies", study.id));
+          fetchCaseStudies();
+        } else {
+          console.error("Error deleting case study:", error);
+        }
       }
     }
   };
@@ -54,9 +71,13 @@ export default function CaseStudiesPage() {
   };
 
   return (
-    <div>
+    <div className="text-white">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Case Studies</h1>
+        <h1 className="text-3xl font-bold mb-6">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+            Dashboard Overview
+          </span>
+        </h1>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -79,45 +100,52 @@ export default function CaseStudiesPage() {
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
         </div>
+      ) : error ? (
+        <div className="text-center py-8 text-red-400 bg-red-900/20 rounded-lg">
+          {error}
+        </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+        <div className="bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+          <table className="min-w-full divide-y divide-gray-700">
+            <thead className="bg-gray-700/50">
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
                 >
                   Title
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
                 >
                   Tags
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
                 >
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-gray-800 divide-y divide-gray-700">
               {caseStudies.map((study) => (
                 <tr key={study.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
+                    <Link
+                      href={`/case-studies/${study.id}`}
+                      className="text-sm font-medium text-gray-100 hover:text-purple-400 transition-colors"
+                    >
                       {study.title}
-                    </div>
+                    </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex flex-wrap gap-1">
                       {study.tags?.map((tag, index) => (
                         <span
                           key={index}
-                          className="px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded-full"
+                          className="px-2 py-1 text-xs bg-purple-500/20 text-purple-300 rounded-full"
                         >
                           {tag}
                         </span>
@@ -133,7 +161,7 @@ export default function CaseStudiesPage() {
                         <Pencil className="h-5 w-5" />
                       </button>
                       <button
-                        onClick={() => handleDelete(study.id)}
+                        onClick={() => handleDelete(study)}
                         className="text-red-500 hover:text-red-700"
                       >
                         <Trash2 className="h-5 w-5" />
