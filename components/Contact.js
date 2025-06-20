@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Send,
   User,
@@ -152,10 +153,12 @@ const ContactSection = () => {
     },
     {
       icon: (
-        <img
+        <Image
           src="/images/call_icon.svg"
           alt="call icon"
-          className="w-6 h-6 inline"
+          width={24}
+          height={24}
+          className="inline"
         />
       ),
       title: "Call Us",

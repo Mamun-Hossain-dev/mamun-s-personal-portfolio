@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Linkedin,
   Twitter,
@@ -38,22 +39,33 @@ const Footer = () => {
   const contactInfo = [
     {
       icon: (
-        <img src="/images/mail_icon.svg" alt="mail icon" className="w-6 h-6" />
+        <Image
+          src="/images/mail_icon.svg"
+          alt="mail icon"
+          width={24}
+          height={24}
+        />
       ),
       text: "Tanjildigital@gmail.com",
     },
     {
       icon: (
-        <img src="/images/call_icon.svg" alt="call icon" className="w-6 h-6" />
+        <Image
+          src="/images/call_icon.svg"
+          alt="call icon"
+          width={24}
+          height={24}
+        />
       ),
       text: "+8801948873556",
     },
     {
       icon: (
-        <img
+        <Image
           src="/images/location_icon.svg"
           alt="location icon"
-          className="w-6 h-6"
+          width={24}
+          height={24}
         />
       ),
       text: "Dhaka, Bangladesh",

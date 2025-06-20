@@ -3,8 +3,45 @@ import ClientLayout from "@/components/ClientLayout";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Tanjil Hossain - Portfolio",
-  description: "Full Stack Developer & UI/UX Designer Portfolio",
+  metadataBase: new URL("https://tanzil-portfolio-main.vercel.app"),
+  title: "Tanzil Hossain - Digital Marketing Expert",
+  description:
+    "Tanzil Hossain's portfolio showcasing expertise in Facebook Marketing, Google Marketing, Web Analytics, and Social Media Marketing. Let's start a conversation about your project.",
+  keywords: [
+    "Tanzil Hossain",
+    "Digital Marketing",
+    "SEO",
+    "Facebook Marketing",
+    "Google Marketing",
+    "Web Analytics",
+    "Social Media Marketing",
+    "Portfolio",
+  ],
+  openGraph: {
+    title: "Tanzil Hossain - Digital Marketing Expert",
+    description:
+      "Expert in driving growth through digital marketing strategies.",
+    url: "https://tanzil-portfolio-main.vercel.app",
+    siteName: "Tanzil Hossain Portfolio",
+    images: [
+      {
+        url: "/images/Tanzilhossain.jpg",
+        width: 800,
+        height: 600,
+        alt: "Tanzil Hossain Profile",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tanzil Hossain - Digital Marketing Expert",
+    description:
+      "Expert in driving growth through digital marketing strategies.",
+    creator: "@mdtanjilhosain",
+    images: ["/images/Tanzilhossain.jpg"],
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -25,10 +25,12 @@ const About = () => {
       className="relative py-20 bg-gradient-to-br from-gray-900 to-black"
     >
       <div className="absolute inset-0 -z-10">
-        <img
+        <Image
           src="/images/theme_pattern.svg"
           alt="pattern-icon"
-          className="w-full h-full object-cover opacity-10"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-10"
         />
       </div>
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-16 md:gap-20">
