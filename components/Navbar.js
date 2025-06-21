@@ -17,9 +17,12 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  const protectedNavItems = [
     { name: "Latest Works", href: "/latest-works" },
     { name: "Case Studies", href: "/case-studies" },
-    { name: "Contact", href: "/contact" },
   ];
 
   // Handle scroll effect for navbar
@@ -120,6 +123,19 @@ const Navbar = () => {
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
+              {user &&
+                protectedNavItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="relative px-4 py-2 rounded-lg group shadow-lg hover:shadow-xl transition-shadow"
+                  >
+                    <span className="text-gray-300 group-hover:text-white transition-colors">
+                      {item.name}
+                    </span>
+                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 group-hover:w-full transition-all duration-300" />
+                  </Link>
+                ))}
             </div>
           </div>
 
@@ -254,70 +270,90 @@ const Navbar = () => {
                       </Link>
                     </motion.li>
                   ))}
+                  {user &&
+                    protectedNavItems.map((item) => (
+                      <motion.li
+                        key={item.name}
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/5"
+                        >
+                          {item.name}
+                        </Link>
+                      </motion.li>
+                    ))}
                 </ul>
 
-                {user ? (
-                  <div className="px-4">
-                    <div className="flex items-center space-x-3 mb-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-800">
-                        {user.displayName?.[0] || user.email?.[0] || "U"}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-white">
-                          {user.displayName || user.email}
+                {/* Mobile Auth Section */}
+                <div className="border-t border-white/10 pt-4">
+                  {user ? (
+                    <div className="px-4">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-800">
+                          {user.displayName?.[0] || user.email?.[0] || "U"}
                         </div>
-                        <div className="text-xs text-gray-400">{role}</div>
+                        <div>
+                          <div className="font-semibold text-white">
+                            {user.displayName || user.email}
+                          </div>
+                          <div className="text-xs text-gray-400">{role}</div>
+                        </div>
                       </div>
-                    </div>
-                    {role === "admin" && (
+                      {role === "admin" && (
+                        <button
+                          onClick={() => {
+                            setIsMenuOpen(false);
+                            router.push("/dashboard");
+                          }}
+                          className="block w-full text-left px-4 py-2 rounded hover:bg-purple-100 text-purple-700 mb-2"
+                        >
+                          Admin Dashboard
+                        </button>
+                      )}
                       <button
                         onClick={() => {
                           setIsMenuOpen(false);
-                          router.push("/dashboard");
+                          logout();
                         }}
-                        className="block w-full text-left px-4 py-2 rounded hover:bg-purple-100 text-purple-700 mb-2"
+                        className="block w-full text-left px-4 py-2 rounded hover:bg-red-100 text-red-700 flex items-center"
                       >
-                        Admin Dashboard
+                        <LogOut size={16} className="mr-2" /> Logout
                       </button>
-                    )}
-                    <button
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        logout();
-                      }}
-                      className="block w-full text-left px-4 py-2 rounded hover:bg-red-100 text-red-700 flex items-center"
-                    >
-                      <LogOut size={16} className="mr-2" /> Logout
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex space-x-4 px-4">
-                    <Link
-                      href="/register"
-                      className="flex-1"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <motion.button
-                        whileTap={{ scale: 0.95 }}
-                        className="w-full px-4 py-2.5 rounded-lg font-medium bg-white/10 border border-white/20 text-white"
+                    </div>
+                  ) : (
+                    <div className="flex space-x-4 px-4">
+                      <Link
+                        href="/register"
+                        className="flex-1"
+                        onClick={() => setIsMenuOpen(false)}
                       >
-                        Register
-                      </motion.button>
-                    </Link>
-                    <Link
-                      href="/login"
-                      className="flex-1"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <motion.button
-                        whileTap={{ scale: 0.95 }}
-                        className="w-full px-4 py-2.5 rounded-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                        <motion.button
+                          whileTap={{ scale: 0.95 }}
+                          className="w-full px-4 py-2.5 rounded-lg font-medium bg-white/10 border border-white/20 text-white"
+                        >
+                          Register
+                        </motion.button>
+                      </Link>
+                      <Link
+                        href="/login"
+                        className="flex-1"
+                        onClick={() => setIsMenuOpen(false)}
                       >
-                        Login
-                      </motion.button>
-                    </Link>
-                  </div>
-                )}
+                        <motion.button
+                          whileTap={{ scale: 0.95 }}
+                          className="w-full px-4 py-2.5 rounded-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                        >
+                          Login
+                        </motion.button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           )}
