@@ -17,12 +17,9 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const protectedNavItems = [
     { name: "Latest Works", href: "/latest-works" },
     { name: "Case Studies", href: "/case-studies" },
+    { name: "Contact", href: "/contact" },
   ];
 
   // Handle scroll effect for navbar
@@ -123,19 +120,6 @@ const Navbar = () => {
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
-              {user &&
-                protectedNavItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="relative px-4 py-2 rounded-lg group shadow-lg hover:shadow-xl transition-shadow"
-                  >
-                    <span className="text-gray-300 group-hover:text-white transition-colors">
-                      {item.name}
-                    </span>
-                    <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 group-hover:w-full transition-all duration-300" />
-                  </Link>
-                ))}
             </div>
           </div>
 
@@ -270,23 +254,6 @@ const Navbar = () => {
                       </Link>
                     </motion.li>
                   ))}
-                  {user &&
-                    protectedNavItems.map((item) => (
-                      <motion.li
-                        key={item.name}
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Link
-                          href={item.href}
-                          onClick={() => setIsMenuOpen(false)}
-                          className="block w-full text-left px-4 py-2 rounded-lg hover:bg-white/5"
-                        >
-                          {item.name}
-                        </Link>
-                      </motion.li>
-                    ))}
                 </ul>
 
                 {/* Mobile Auth Section */}
