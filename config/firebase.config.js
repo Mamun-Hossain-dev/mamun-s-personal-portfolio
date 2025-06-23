@@ -5,14 +5,16 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAnalytics } from "firebase/analytics";
 
+// Your web app's Firebase configuration
+// WARNING: It is not recommended to hardcode these values.
+// You should use environment variables to keep your API keys safe.
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyAMGOGgASiHYEh7Ca1bJzzZA8o3w6Zyxnk",
+  authDomain: "mamun-s-personal-portfolio.firebaseapp.com",
+  projectId: "mamun-s-personal-portfolio",
+  storageBucket: "mamun-s-personal-portfolio.firebasestorage.app",
+  messagingSenderId: "642656600590",
+  appId: "1:642656600590:web:4644d046ab9854441b325f",
 };
 
 const app = initializeApp(firebaseConfig);

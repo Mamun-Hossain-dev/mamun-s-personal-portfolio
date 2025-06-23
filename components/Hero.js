@@ -86,23 +86,23 @@ const Hero = memo(() => {
   const socialLinks = [
     {
       icon: <Facebook size={24} />,
-      url: "https://www.facebook.com/MdTanjilHossaiin/",
+      url: "https://www.facebook.com/mamun.hossain.565330",
       label: "Facebook",
     },
     {
       icon: <Linkedin size={24} />,
-      url: "https://www.linkedin.com/in/mdtanjilhossaiin/",
+      url: "https://www.linkedin.com/in/mamun-hossain-3a568b248/",
       label: "LinkedIn",
     },
     {
       icon: <Twitter size={24} />,
-      url: "https://x.com/mdtanjilhosain",
+      url: "#",
       label: "Twitter",
     },
     {
-      icon: <Instagram size={24} />,
-      url: "https://www.instagram.com/mdtanjilhossaiin/",
-      label: "Instagram",
+      icon: <Github size={24} />,
+      url: "https://github.com/Mamun128169",
+      label: "Github",
     },
   ];
 
@@ -136,10 +136,10 @@ const Hero = memo(() => {
             <motion.div variants={itemVariants}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500">
-                  I&apos;m Tanjil Hossain,
+                  I&apos;m Mamun Hossain,
                 </span>
                 <span className="block mt-2 text-white">
-                  Professional Digital Marketer
+                  Full Stack Web Developer
                 </span>
               </h1>
             </motion.div>
@@ -147,8 +147,11 @@ const Hero = memo(() => {
               className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl"
               variants={itemVariants}
             >
-              I&apos;m an AI-powered, data-driven digital marketer based
-              worldwide, helping businesses grow online.
+              I&apos;m a full stack JavaScript developer based in Bangladesh,
+              specializing in building modern, secure, and scalable web
+              applications. With expertise in React, Next.js, Node.js, Express,
+              Firebase, and MongoDB, I help businesses bring their digital
+              visions to life.
             </motion.p>
             <motion.div
               className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
@@ -160,7 +163,7 @@ const Hero = memo(() => {
                 whileTap="tap"
                 onClick={handleConnectClick}
                 className="px-8 py-3.5 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom cursor-pointer"
-                aria-label="Connect with Tanjil Hossain"
+                aria-label="Connect with Mamun Hossain"
               >
                 Connect with me
               </motion.button>
@@ -169,7 +172,7 @@ const Hero = memo(() => {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleResumeClick}
                 className="px-8 py-3.5 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all cursor-pointer"
-                aria-label="View Tanjil Hossain's resume"
+                aria-label="View Mamun Hossain's resume"
               >
                 View Resume
               </motion.button>
@@ -205,8 +208,8 @@ const Hero = memo(() => {
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-transparent bg-gradient-to-br from-purple-500 to-pink-500 p-1">
                 <div className="absolute inset-0 rounded-full overflow-hidden">
                   <Image
-                    src="/images/Tanzilhossain.jpg"
-                    alt="Tanjil Hossain"
+                    src="/images/mamun.jpg"
+                    alt="Mamun Hossain"
                     fill
                     sizes="(max-width: 1024px) 320px, 400px"
                     className="w-full h-full object-cover rounded-full shadow-lg"

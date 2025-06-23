@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Latest Works", href: "/latest-works" },
+    { name: "Projects", href: "/projects" },
     { name: "Case Studies", href: "/case-studies" },
     { name: "Contact", href: "/contact" },
   ];
@@ -96,9 +96,9 @@ const Navbar = () => {
               >
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-1 rounded-lg">
                   <div className="bg-gray-900 p-2 rounded-md">
-                    <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
-                      Tanjil Hossain
-                    </h2>
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+                      Mamun Hossain
+                    </h1>
                   </div>
                 </div>
               </motion.div>
@@ -173,18 +173,6 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link href="/register">
-                  <motion.button
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundPosition: "100% 0",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-5 py-2 rounded-xl font-medium bg-white/10 border border-white/20 backdrop-blur-lg text-white hover:bg-white/15 transition-all"
-                  >
-                    Register
-                  </motion.button>
-                </Link>
                 <Link href="/login">
                   <motion.button
                     whileHover={{
@@ -194,7 +182,7 @@ const Navbar = () => {
                     whileTap={{ scale: 0.95 }}
                     className="px-5 py-2 rounded-xl font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom"
                   >
-                    Login
+                    Admin Login
                   </motion.button>
                 </Link>
               </>
@@ -295,18 +283,6 @@ const Navbar = () => {
                   ) : (
                     <div className="flex space-x-4 px-4">
                       <Link
-                        href="/register"
-                        className="flex-1"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        <motion.button
-                          whileTap={{ scale: 0.95 }}
-                          className="w-full px-4 py-2.5 rounded-lg font-medium bg-white/10 border border-white/20 text-white"
-                        >
-                          Register
-                        </motion.button>
-                      </Link>
-                      <Link
                         href="/login"
                         className="flex-1"
                         onClick={() => setIsMenuOpen(false)}
@@ -315,7 +291,7 @@ const Navbar = () => {
                           whileTap={{ scale: 0.95 }}
                           className="w-full px-4 py-2.5 rounded-lg font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white"
                         >
-                          Login
+                          Admin Login
                         </motion.button>
                       </Link>
                     </div>

@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import imageCompression from "browser-image-compression";
 import { doc, setDoc, collection, Timestamp } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "@/config/firebase.config";
+import { db } from "@/config/firebase.config";
 
 // Helper function to generate a unique ID
 const generateUniqueId = () => {
@@ -58,9 +57,9 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
       // Upload to Cloudinary
       const formData = new FormData();
       formData.append("file", compressedFile);
-      formData.append("upload_preset", "unsigned_preset");
+      formData.append("upload_preset", "mamun's portfolio");
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dlcpaiziv/image/upload",
+        "https://api.cloudinary.com/v1_1/mamun-s-personal-portfolio/image/upload",
         {
           method: "POST",
           body: formData,

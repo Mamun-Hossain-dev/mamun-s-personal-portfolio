@@ -2,10 +2,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
-const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: "📊" },
-  { name: "Case Studies", href: "/dashboard/case-studies", icon: "📁" },
-  { name: "Latest Works", href: "/dashboard/latest-works", icon: "🖼️" },
+const navItems = [
+  { name: "Projects", href: "/dashboard/projects", icon: "🗂️" },
+  { name: "Case Studies", href: "/dashboard/case-studies", icon: "📄" },
+  { name: "Analytics", href: "/dashboard", icon: "📊" },
   { name: "eBooks", href: "/dashboard/ebooks", icon: "📚", disabled: true },
 ];
 
@@ -19,7 +19,7 @@ export default function Sidebar() {
       </div>
       <nav className="mt-6 px-2">
         <div className="space-y-1">
-          {navigation.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.disabled ? "#" : item.href}

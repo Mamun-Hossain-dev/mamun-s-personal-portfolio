@@ -3,32 +3,46 @@ import ClientLayout from "@/components/ClientLayout";
 import Script from "next/script";
 
 export const metadata = {
-  metadataBase: new URL("https://tanzil-portfolio-main.vercel.app"),
-  title: "Tanzil Hossain - Digital Marketing Expert",
+  metadataBase: new URL("https://mamun-hossain.vercel.app"),
+  title: "Mamun Hossain - Full Stack Web Developer",
   description:
-    "Tanzil Hossain's portfolio showcasing expertise in Facebook Marketing, Google Marketing, Web Analytics, and Social Media Marketing. Let's start a conversation about your project.",
+    "Mamun Hossain's portfolio showcasing expertise in React, Next.js, Node.js, Express, Firebase, and MongoDB. Modern, secure, and scalable web applications for businesses.",
   keywords: [
-    "Tanzil Hossain",
-    "Digital Marketing",
-    "SEO",
-    "Facebook Marketing",
-    "Google Marketing",
-    "Web Analytics",
-    "Social Media Marketing",
+    "Mamun Hossain",
+    "Full Stack Developer",
+    "Web Developer",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Firebase",
     "Portfolio",
+    "Bangladesh",
+    "JavaScript",
+    "MERN Stack",
+    "Frontend",
+    "Backend",
+    "SEO",
+    "Web Application",
   ],
   openGraph: {
-    title: "Tanzil Hossain - Digital Marketing Expert",
+    title: "Mamun Hossain - Full Stack Web Developer",
     description:
-      "Expert in driving growth through digital marketing strategies.",
-    url: "https://tanzil-portfolio-main.vercel.app",
-    siteName: "Tanzil Hossain Portfolio",
+      "I'm a full stack JavaScript developer based in Bangladesh, specializing in building modern, secure, and scalable web applications.",
+    url: "https://mamun-hossain.vercel.app",
+    siteName: "Mamun Hossain's Portfolio",
     images: [
       {
-        url: "/images/Tanzilhossain.jpg",
+        url: "/images/mamun.jpg",
         width: 800,
         height: 600,
-        alt: "Tanzil Hossain Profile",
+      },
+      {
+        url: "/images/mamun.jpg",
+        width: 1800,
+        height: 1600,
+        alt: "Mamun Hossain Portfolio",
       },
     ],
     locale: "en_US",
@@ -36,11 +50,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tanzil Hossain - Digital Marketing Expert",
+    title: "Mamun Hossain - Full Stack Web Developer",
     description:
-      "Expert in driving growth through digital marketing strategies.",
-    creator: "@mdtanjilhosain",
-    images: ["/images/Tanzilhossain.jpg"],
+      "I'm a full stack JavaScript developer based in Bangladesh, specializing in building modern, secure, and scalable web applications.",
+    images: ["/images/mamun.jpg"],
   },
 };
 

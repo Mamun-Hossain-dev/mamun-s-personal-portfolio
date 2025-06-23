@@ -22,11 +22,11 @@ export const AuthProvider = ({ children }) => {
           setUser({
             uid: firebaseUser.uid,
             email: firebaseUser.email,
-            displayName: firebaseUser.displayName,
+            displayName: userData.name || firebaseUser.displayName,
           });
           setRole(userData.role || "user");
         } else {
-          // If user document doesn't exist, create one?
+          // If no user document, treat as logged out
           setUser(null);
           setRole("");
         }

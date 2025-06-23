@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
 
@@ -6,7 +7,7 @@
 body {
   background: #0f0f0f;
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Outfit", sans-serif;
   padding-top: 80px; /* To prevent content from being hidden behind sticky navbar */
 }
 

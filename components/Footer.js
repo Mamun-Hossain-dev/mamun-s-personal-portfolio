@@ -10,75 +10,51 @@ import {
   Phone,
   MapPin,
   Facebook,
+  Github,
 } from "lucide-react";
 
 const Footer = () => {
   const socialLinks = [
     {
       icon: <Facebook size={24} />,
-      url: "https://www.facebook.com/MdTanjilHossaiin/",
+      url: "https://www.facebook.com/mamun.hossain.565330",
       label: "Facebook",
     },
     {
       icon: <Linkedin size={24} />,
-      url: "https://www.linkedin.com/in/mdtanjilhossaiin/",
+      url: "https://www.linkedin.com/in/mamun-hossain-3a568b248/",
       label: "LinkedIn",
     },
     {
       icon: <Twitter size={24} />,
-      url: "https://x.com/mdtanjilhosain",
+      url: "#",
       label: "Twitter",
     },
     {
-      icon: <Instagram size={24} />,
-      url: "https://www.instagram.com/mdtanjilhossaiin/",
-      label: "Instagram",
+      icon: <Github size={24} />,
+      url: "https://github.com/Mamun128169",
+      label: "Github",
     },
   ];
 
   const contactInfo = [
     {
-      icon: (
-        <Image
-          src="/images/mail_icon.svg"
-          alt="Mail Icon"
-          width={20}
-          height={20}
-          style={{ width: 20, height: "auto" }}
-          className="inline-block mr-2"
-        />
-      ),
-      text: "Tanjildigital@gmail.com",
+      icon: <Mail size={20} className="inline-block mr-2" />,
+      text: "mh4559641@gmail.com",
     },
     {
-      icon: (
-        <Image
-          src="/images/call_icon.svg"
-          alt="call icon"
-          width={24}
-          height={24}
-        />
-      ),
-      text: "+8801948873556",
+      icon: <Phone size={20} className="inline-block mr-2" />,
+      text: "+880 1640-571091",
     },
     {
-      icon: (
-        <Image
-          src="/images/location_icon.svg"
-          alt="Location Icon"
-          width={20}
-          height={20}
-          style={{ width: 20, height: "auto" }}
-          className="inline-block mr-2"
-        />
-      ),
+      icon: <MapPin size={20} className="inline-block mr-2" />,
       text: "Dhaka, Bangladesh",
     },
   ];
 
   const footerLinks = [
     { title: "Home", href: "/" },
-    { title: "Latest Works", href: "/latest-works" },
+    { title: "Projects", href: "/projects" },
     { title: "Case Studies", href: "/case-studies" },
     { title: "Contact", href: "/contact" },
   ];
@@ -92,7 +68,7 @@ const Footer = () => {
       viewport={{ once: true }}
     >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {/* Brand Column */}
           <div>
             <motion.div
@@ -101,13 +77,14 @@ const Footer = () => {
             >
               <div className="bg-gray-900 p-2 rounded-md">
                 <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
-                  Tanjil Hossain
+                  Mamun Hossain
                 </h2>
               </div>
             </motion.div>
             <p className="mt-4 text-gray-400 max-w-xs">
-              I&apos;m Tanjil Hossain, an AI-powered, data-driven digital
-              marketer based worldwide, helping businesses grow online.
+              I&apos;m a full stack JavaScript developer based in Bangladesh,
+              specializing in building modern, secure, and scalable web
+              applications.
             </p>
 
             {/* Social Icons */}
@@ -172,45 +149,6 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
-          {/* Newsletter Column */}
-          <div>
-            <h3 className="text-xl font-bold text-white mb-6">Newsletter</h3>
-            <p className="text-gray-400 mb-4">
-              Subscribe to get the latest updates on web development trends.
-            </p>
-            <form
-              className="space-y-4"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.target;
-                const email = form.elements.email.value;
-                if (email) {
-                  alert(`Subscribed with: ${email}`);
-                  form.reset();
-                }
-              }}
-            >
-              <div className="relative">
-                <input
-                  id="footer-subscribe-email"
-                  name="email"
-                  type="email"
-                  placeholder="Your email address"
-                  className="w-full px-4 py-3 bg-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  required
-                />
-                <motion.button
-                  type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-1.5 rounded-lg"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Subscribe
-                </motion.button>
-              </div>
-            </form>
-          </div>
         </div>
 
         {/* Divider */}
@@ -225,7 +163,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center mt-10">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © 2025 Tanjil Hossain. All rights reserved.
+            © 2024 Mamun Hossain. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-6 items-center">
             <a

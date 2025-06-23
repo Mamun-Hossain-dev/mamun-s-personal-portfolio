@@ -36,10 +36,10 @@ const About = () => {
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-16 md:gap-20">
         {/* Left: Large Square Image */}
         <div className="flex-1 flex justify-center md:justify-start">
-          <div className="hidden md:block relative w-80 h-80 lg:w-[400px] lg:h-[400px] rounded-2xl overflow-hidden border-4 border-purple-500 shadow-2xl">
+          <div className="hidden md:block relative w-80 h-80 lg:w-[500px] lg:h-[500px] rounded-2xl overflow-hidden border-4 border-purple-500 shadow-2xl">
             <Image
-              src="/images/Tanzilhossain.jpg"
-              alt="Tanjil Hossain"
+              src="/images/mamun.jpg"
+              alt="Mamun Hossain"
               fill
               sizes="(max-width: 1024px) 320px, 400px"
               style={{ objectFit: "cover" }}
@@ -72,48 +72,62 @@ const About = () => {
             />
           </div>
           <p className="text-gray-300 text-lg mb-6">
-            I&apos;m Tanjil Hossain, an AI-powered, data-driven digital marketer
-            based worldwide, helping businesses grow online. Ive worked with
-            brands in Bangladesh and abroad, driving growth through effective
-            Facebook & Google Ads, SEO, Email Marketing, and Web Analytics. My
-            passion for digital marketing is reflected in the results I deliver
-            and the strategic thinking I bring to every campaign. Im focused on
-            measurable outcomes, blending creativity with data to help brands
-            grow smarter.
+            I&apos;m Mamun Hossain, a passionate and results-driven full stack
+            web developer with a strong background in JavaScript technologies. I
+            build robust and responsive web applications using MERN stack
+            technologies — React, Next.js, Node.js, Express, and MongoDB —
+            integrated with services like Firebase for real-time performance and
+            authentication. I&apos;m focused on writing clean, efficient code
+            and delivering seamless user experiences for clients both in
+            Bangladesh and abroad.
+          </p>
+          <p className="text-gray-300 text-lg mb-6">
+            Whether you&apos;re a startup needing an MVP, or a business looking
+            for a dynamic portfolio, dashboard, or full-fledged eCommerce
+            platform, I bring technical expertise and creative problem-solving
+            to every project.
           </p>
 
-          {/* Skills Progress Bars */}
-          <div className="space-y-5 mb-10">
-            {[
-              { name: "Facebook Marketing", level: 95 },
-              { name: "Google Marketing", level: 92 },
-              { name: "Web Analytics", level: 90 },
-              { name: "Social Media Marketing", level: 93 },
-              { name: "Email Marketing", level: 88 },
-            ].map((skill) => (
-              <div key={skill.name}>
-                <div className="flex justify-between mb-1">
-                  <span className="text-white font-medium text-sm">
-                    {skill.name}
-                  </span>
-                  <span className="text-gray-300 text-xs font-semibold">
-                    {skill.level}%
-                  </span>
-                </div>
-                <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full"
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
-                </div>
-              </div>
-            ))}
+          {/* Skills */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-bold text-white mb-4">Skills</h3>
+            <div className="flex flex-wrap gap-4">
+              {[
+                "React.js",
+                "Next.js",
+                "Tailwind CSS",
+                "DaisyUI",
+                "Node.js",
+                "Express.js",
+                "Firebase Functions",
+                "MongoDB",
+                "Firestore",
+                "Firebase Auth",
+                "JWT",
+                "Git",
+                "GitHub",
+                "Vercel",
+                "Netlify",
+                "REST API",
+                "Form Validation",
+                "Deployment",
+                "SEO Basics",
+              ].map((skill) => (
+                <span
+                  key={skill}
+                  className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
+
           {/* Stats with gradient backgrounds */}
           <div className="flex flex-wrap gap-6 justify-center md:justify-start">
             <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 shadow-lg">
               <span className="text-3xl font-bold text-white drop-shadow">
-                3+
+                2+
               </span>
               <span className="text-white text-sm font-medium">
                 years of experience
@@ -121,7 +135,7 @@ const About = () => {
             </div>
             <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 shadow-lg">
               <span className="text-3xl font-bold text-white drop-shadow">
-                90+
+                30+
               </span>
               <span className="text-white text-sm font-medium">
                 projects completed
@@ -129,10 +143,10 @@ const About = () => {
             </div>
             <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 shadow-lg">
               <span className="text-3xl font-bold text-white drop-shadow">
-                25+
+                10+
               </span>
               <span className="text-white text-sm font-medium">
-                Happy clients
+                satisfied clients
               </span>
             </div>
           </div>

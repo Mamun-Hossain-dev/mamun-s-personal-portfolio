@@ -14,6 +14,7 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  Github,
 } from "lucide-react";
 
 const ContactSection = () => {
@@ -28,7 +29,7 @@ const ContactSection = () => {
   const [errors, setErrors] = useState({});
 
   // Web3Forms access key
-  const WEB3FORMS_ACCESS_KEY = "9225e9ec-e066-43d4-8cfb-7dac8c1a57f5";
+  const WEB3FORMS_ACCESS_KEY = "a844a83a-bad5-4e25-9666-ee83cf9fe852";
 
   const validateForm = () => {
     const newErrors = {};
@@ -120,58 +121,48 @@ const ContactSection = () => {
   const socialLinks = [
     {
       icon: Facebook,
-      href: "https://www.facebook.com/MdTanjilHossaiin/",
+      href: "https://www.facebook.com/mamun.hossain.565330",
       label: "Facebook",
       color: "hover:text-blue-500",
     },
     {
       icon: Twitter,
-      href: "https://x.com/mdtanjilhosain",
+      href: "#",
       label: "Twitter",
       color: "hover:text-sky-400",
     },
     {
-      icon: Instagram,
-      href: "https://www.instagram.com/mdtanjilhossaiin/",
-      label: "Instagram",
-      color: "hover:text-pink-500",
-    },
-    {
       icon: Linkedin,
-      href: "https://www.linkedin.com/in/mdtanjilhossaiin/",
+      href: "https://www.linkedin.com/in/mamun-hossain-3a568b248/",
       label: "LinkedIn",
       color: "hover:text-blue-600",
+    },
+    {
+      icon: Github,
+      href: "https://github.com/Mamun128169",
+      label: "Github",
+      color: "hover:text-gray-300",
     },
   ];
 
   const contactInfo = [
     {
       icon: <Mail className="text-purple-400" size={24} />,
-      title: "Email Us",
-      detail: "Tanjildigital@gmail.com",
-      href: "mailto:Tanjildigital@gmail.com",
+      title: "Email Me",
+      detail: "mh4559641@gmail.com",
+      href: "mailto:mh4559641@gmail.com",
     },
     {
-      icon: (
-        <Image
-          src="/images/call_icon.svg"
-          alt="call icon"
-          width={24}
-          height={24}
-          style={{ width: 24, height: "auto" }}
-          className="inline"
-        />
-      ),
-      title: "Call Us",
-      detail: "+8801948873556",
-      href: "tel:+8801948873556",
+      icon: <Phone className="text-purple-400" size={24} />,
+      title: "Call Me",
+      detail: "+880 1640-571091",
+      href: "tel:+8801640571091",
     },
-  ];
-
-  const businessHours = [
-    { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM" },
-    { day: "Saturday", hours: "10:00 AM - 4:00 PM" },
-    { day: "Sunday", hours: "Closed" },
+    {
+      icon: <MapPin className="text-purple-400" size={24} />,
+      title: "Location",
+      detail: "Dhaka, Bangladesh",
+    },
   ];
 
   return (
@@ -212,14 +203,14 @@ const ContactSection = () => {
           >
             <div>
               <h1 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-                Lets Start a{" "}
+                Let&apos;s Start a{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
                   Conversation
                 </span>
               </h1>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Ready to discuss your project? Fill out the form and Ill get
-                back to you within 24 hours.
+                Ready to discuss your project? Fill out the form and I&apos;ll
+                get back to you within 24 hours.
               </p>
             </div>
 
@@ -261,25 +252,6 @@ const ContactSection = () => {
                 })}
               </div>
             </div>
-
-            <motion.div
-              className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:scale-[1.02] transition-all duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <h3 className="text-lg font-semibold text-white mb-4">
-                Business Hours
-              </h3>
-              <div className="space-y-2 text-gray-300">
-                {businessHours.map((schedule, index) => (
-                  <div key={index} className="flex justify-between">
-                    <span>{schedule.day}</span>
-                    <span>{schedule.hours}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Right Column - Contact Form */}
@@ -319,42 +291,37 @@ const ContactSection = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">
-                  Service Interest{" "}
-                  <span className="text-gray-500 ml-1">(Optional)</span>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Service Interest
                 </label>
-                <div className="relative">
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 appearance-none text-white transition-all duration-200"
-                  >
-                    <option value="" className="bg-gray-800">
-                      Select a service (optional)
-                    </option>
-                    <option value="facebook-marketing" className="bg-gray-800">
-                      Facebook Marketing
-                    </option>
-                    <option value="google-marketing" className="bg-gray-800">
-                      Google Marketing
-                    </option>
-                    <option value="web-analytics" className="bg-gray-800">
-                      Web Analytics
-                    </option>
-                    <option
-                      value="social-media-marketing"
-                      className="bg-gray-800"
-                    >
-                      Social Media Marketing
-                    </option>
-                  </select>
-                  <Briefcase
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                    size={18}
-                  />
-                </div>
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-purple-500 focus:border-purple-500"
+                >
+                  <option value="">Select a service</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="React & Next.js Applications">
+                    React & Next.js Applications
+                  </option>
+                  <option value="Backend Development (Node.js & Express)">
+                    Backend Development (Node.js & Express)
+                  </option>
+                  <option value="Firebase Integration">
+                    Firebase Integration
+                  </option>
+                  <option value="MongoDB Database Solutions">
+                    MongoDB Database Solutions
+                  </option>
+                  <option value="Portfolio Website">Portfolio Website</option>
+                  <option value="Dashboard Development">
+                    Dashboard Development
+                  </option>
+                  <option value="eCommerce Platform">eCommerce Platform</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
 
               <div className="space-y-2">

@@ -7,33 +7,33 @@ const Services = () => {
   const services = [
     {
       number: "01",
-      title: "Facebook Marketing",
+      title: "Web Development",
       description:
-        "Create and optimize high-performing Facebook ad campaigns to reach the right audience and boost sales with maximum ROI.",
+        "Build fast, secure, and responsive websites or web apps with the latest JavaScript technologies and frameworks.",
     },
     {
       number: "02",
-      title: "Google Marketing",
+      title: "React & Next.js Applications",
       description:
-        "Manage PPC, display, YouTube, and search ads with SEO strategies to drive targeted traffic and improve conversions.",
+        "Create scalable and SEO-friendly single-page and server-side rendered apps using React and Next.js.",
     },
     {
       number: "03",
-      title: "Social Media Marketing",
+      title: "Backend Development (Node.js & Express)",
       description:
-        "Run tailored campaigns and create engaging content across platforms like Instagram, LinkedIn, TikTok, and YouTube to grow your brand.",
+        "Develop RESTful APIs and powerful backend solutions tailored for performance, security, and scalability.",
     },
     {
       number: "04",
-      title: "Web Analytics (GTM & GA4)",
+      title: "Firebase Integration",
       description:
-        "Track user behavior and campaign performance using Google Tag Manager and GA4 to guide data-driven decisions and boost conversions.",
+        "Implement real-time databases, authentication systems, and cloud functions with Firebase.",
     },
     {
       number: "05",
-      title: "Email Marketing",
+      title: "MongoDB Database Solutions",
       description:
-        "Create personalized, high-converting email campaigns to nurture leads, increase customer retention, and drive long-term growth.",
+        "Design and manage NoSQL databases with Mongoose for seamless data handling and storage.",
     },
   ];
 
