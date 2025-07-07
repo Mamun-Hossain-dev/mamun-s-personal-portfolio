@@ -13,6 +13,10 @@ const generateUniqueId = () => {
   return `${timestamp}-${randomStr}`;
 };
 
+const CLOUDINARY_UPLOAD_PRESET = "mamun's portfolio";
+const CLOUDINARY_CLOUD_NAME = "mamun-s-personal-portfolio";
+const CLOUDINARY_API_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+
 const ProjectForm = ({ onSubmit, initialData }) => {
   const [title, setTitle] = useState(initialData?.title || "");
   const [liveLink, setLiveLink] = useState(initialData?.liveLink || "");
@@ -23,22 +27,90 @@ const ProjectForm = ({ onSubmit, initialData }) => {
   );
   const [techStack, setTechStack] = useState(initialData?.techStack || "");
   const [tags, setTags] = useState(initialData?.tags || "");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [imageUrl, setImageUrl] = useState(initialData?.imageUrl || "");
+  const [isCompressing, setIsCompressing] = useState(false);
 
-  const handleScreenshotChange = (e) => {
-    setScreenshot(e.target.files[0]);
+  const handleScreenshotChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setIsCompressing(true);
+    try {
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      const compressedFile = await imageCompression(file, options);
+      // Upload to Cloudinary
+      const formData = new FormData();
+      formData.append("file", compressedFile);
+      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+      const res = await fetch(CLOUDINARY_API_URL, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (!data.secure_url) throw new Error("Cloudinary upload failed");
+      setImageUrl(data.secure_url);
+      setScreenshot(null);
+    } catch (error) {
+      console.error("Image upload error:", error);
+      setError("Failed to upload image. Please try a different file.");
+      setScreenshot(null);
+    } finally {
+      setIsCompressing(false);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit({
-      title,
-      liveLink,
-      repoLink,
-      screenshot,
-      description,
-      techStack,
-      tags,
-    });
+    setLoading(true);
+    setError("");
+    try {
+      if (!imageUrl) {
+        setError("Please upload a project screenshot.");
+        setLoading(false);
+        return;
+      }
+      // Save to Firestore
+      const id = generateUniqueId();
+      await setDoc(doc(collection(db, "projects"), id), {
+        title,
+        liveLink,
+        repoLink,
+        imageUrl,
+        description,
+        techStack,
+        tags,
+        createdAt: Timestamp.now(),
+      });
+      if (onSubmit)
+        onSubmit({
+          title,
+          liveLink,
+          repoLink,
+          imageUrl,
+          description,
+          techStack,
+          tags,
+        });
+      // Reset form
+      setTitle("");
+      setLiveLink("");
+      setRepoLink("");
+      setScreenshot(null);
+      setImageUrl("");
+      setDescription("");
+      setTechStack("");
+      setTags("");
+    } catch (err) {
+      setError("Failed to save project. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -80,7 +152,25 @@ const ProjectForm = ({ onSubmit, initialData }) => {
           accept="image/*"
           onChange={handleScreenshotChange}
           className="w-full"
+          disabled={isCompressing || loading}
         />
+        {isCompressing && (
+          <div className="text-sm text-gray-400 mt-1">
+            Compressing & uploading...
+          </div>
+        )}
+        {imageUrl && (
+          <div className="mt-2">
+            <Image
+              src={imageUrl}
+              alt="Preview"
+              width={320}
+              height={240}
+              style={{ width: 320, height: "auto" }}
+              className="max-w-xs h-auto rounded-lg"
+            />
+          </div>
+        )}
       </div>
       <div>
         <label className="block font-medium mb-1">
@@ -113,11 +203,13 @@ const ProjectForm = ({ onSubmit, initialData }) => {
           placeholder="e.g. portfolio, dashboard"
         />
       </div>
+      {error && <div className="text-red-500 text-sm">{error}</div>}
       <button
         type="submit"
         className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded font-semibold"
+        disabled={loading || isCompressing}
       >
-        Save Project
+        {loading ? "Saving..." : "Save Project"}
       </button>
     </form>
   );
