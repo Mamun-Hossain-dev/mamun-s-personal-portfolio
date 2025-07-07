@@ -94,7 +94,9 @@ const About = () => {
             <div className="flex flex-wrap gap-4">
               {[
                 "React.js",
-                "Next.js",
+                "Next.js (Basics)",
+                "Redux (Basics)",
+                "TypeScript (Basics)",
                 "Tailwind CSS",
                 "DaisyUI",
                 "Node.js",
@@ -127,7 +129,7 @@ const About = () => {
           <div className="flex flex-wrap gap-6 justify-center md:justify-start">
             <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 shadow-lg">
               <span className="text-3xl font-bold text-white drop-shadow">
-                2+
+                1+
               </span>
               <span className="text-white text-sm font-medium">
                 years of experience
@@ -135,7 +137,7 @@ const About = () => {
             </div>
             <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 shadow-lg">
               <span className="text-3xl font-bold text-white drop-shadow">
-                30+
+                15+
               </span>
               <span className="text-white text-sm font-medium">
                 projects completed
@@ -143,7 +145,7 @@ const About = () => {
             </div>
             <div className="flex flex-col items-center px-6 py-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 shadow-lg">
               <span className="text-3xl font-bold text-white drop-shadow">
-                10+
+                05+
               </span>
               <span className="text-white text-sm font-medium">
                 satisfied clients
