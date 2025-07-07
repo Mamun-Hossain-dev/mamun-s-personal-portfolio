@@ -80,7 +80,7 @@ const Hero = memo(() => {
   }, []);
 
   const handleResumeClick = useCallback(() => {
-    window.open("/Professional%20Minimalist%20CV%20Resume.pdf", "_blank");
+    window.open("/Mamun.dev.pdf", "_blank");
   }, []);
 
   const socialLinks = [
