@@ -72,48 +72,36 @@ const About = () => {
             />
           </div>
           <p className="text-gray-300 text-lg mb-6">
-            I&apos;m Mamun Hossain, a passionate and results-driven full stack
-            web developer with a strong background in JavaScript technologies. I
-            build robust and responsive web applications using MERN stack
-            technologies — React, Next.js, Node.js, Express, and MongoDB —
-            integrated with services like Firebase for real-time performance and
-            authentication. I&apos;m focused on writing clean, efficient code
-            and delivering seamless user experiences for clients both in
-            Bangladesh and abroad.
+            Detail-oriented MERN Stack Developer skilled in building scalable,
+            responsive apps using React, Next.js, Node.js, and MongoDB. Strong
+            grasp of TypeScript, Redux, REST APIs, and secure authentication
+            systems. Passionate about clean code, SEO, and performance
+            optimization.
           </p>
-          <p className="text-gray-300 text-lg mb-6">
-            Whether you&apos;re a startup needing an MVP, or a business looking
-            for a dynamic portfolio, dashboard, or full-fledged eCommerce
-            platform, I bring technical expertise and creative problem-solving
-            to every project.
-          </p>
-
-          {/* Skills */}
           <div className="mb-10">
-            <h3 className="text-2xl font-bold text-white mb-4">Skills</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Technical Skills
+            </h3>
             <div className="flex flex-wrap gap-4">
               {[
-                "React.js",
-                "Next.js (Basics)",
-                "Redux (Basics)",
-                "TypeScript (Basics)",
-                "Tailwind CSS",
-                "DaisyUI",
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Redux",
+                "Tailwind",
                 "Node.js",
-                "Express.js",
-                "Firebase Functions",
+                "Express",
                 "MongoDB",
-                "Firestore",
-                "Firebase Auth",
+                "REST",
                 "JWT",
-                "Git",
-                "GitHub",
-                "Vercel",
-                "Netlify",
-                "REST API",
-                "Form Validation",
-                "Deployment",
-                "SEO Basics",
+                "Firebase",
+                "Git/GitHub",
+                "Cloudinary",
+                "Clerk",
+                "Figma",
+                "SEO",
+                "Responsive Design",
+                "React Hook Form",
               ].map((skill) => (
                 <span
                   key={skill}

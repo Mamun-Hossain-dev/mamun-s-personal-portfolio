@@ -149,8 +149,8 @@ const ContactSection = () => {
     {
       icon: <Mail className="text-purple-400" size={24} />,
       title: "Email Me",
-      detail: "mh4559641@gmail.com",
-      href: "mailto:mh4559641@gmail.com",
+      detail: "mamunhossain128169@gmail.com",
+      href: "mailto:mamunhossain128169@gmail.com",
     },
     {
       icon: <Phone className="text-purple-400" size={24} />,

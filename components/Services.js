@@ -7,33 +7,33 @@ const Services = () => {
   const services = [
     {
       number: "01",
-      title: "Web Development",
+      title: "Frontend Development",
       description:
-        "Build fast, secure, and responsive websites or web apps with the latest JavaScript technologies and frameworks.",
+        "Build responsive, high-performance UIs with React, Next.js, TypeScript, Redux, and Tailwind. Focus on clean code, SEO, and accessibility.",
     },
     {
       number: "02",
-      title: "React & Next.js Applications",
+      title: "Backend & API Development",
       description:
-        "Create scalable and SEO-friendly single-page and server-side rendered apps using React and Next.js.",
+        "Develop robust REST APIs and secure authentication systems using Node.js, Express, MongoDB, and JWT.",
     },
     {
       number: "03",
-      title: "Backend Development (Node.js & Express)",
+      title: "Full Stack MERN Solutions",
       description:
-        "Develop RESTful APIs and powerful backend solutions tailored for performance, security, and scalability.",
+        "Deliver end-to-end scalable web applications using the MERN stack, integrating modern tools like Firebase, Cloudinary, and Clerk.",
     },
     {
       number: "04",
-      title: "Firebase Integration",
+      title: "UI/UX & Prototyping",
       description:
-        "Implement real-time databases, authentication systems, and cloud functions with Firebase.",
+        "Design and prototype user interfaces in Figma, ensuring pixel-perfect, user-friendly, and accessible experiences.",
     },
     {
       number: "05",
-      title: "MongoDB Database Solutions",
+      title: "Performance & SEO Optimization",
       description:
-        "Design and manage NoSQL databases with Mongoose for seamless data handling and storage.",
+        "Optimize web apps for speed, SEO, and best practices, ensuring top performance and discoverability.",
     },
   ];
 

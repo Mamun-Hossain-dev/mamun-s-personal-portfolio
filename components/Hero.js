@@ -80,7 +80,7 @@ const Hero = memo(() => {
   }, []);
 
   const handleResumeClick = useCallback(() => {
-    window.open("/Mamun.dev.pdf", "_blank");
+    window.open("/Mamun_Hossain_resume.pdf", "_blank");
   }, []);
 
   const socialLinks = [

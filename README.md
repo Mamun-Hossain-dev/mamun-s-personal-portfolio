@@ -76,6 +76,6 @@ This application is deployed on [Vercel](https://vercel.com/). Any push to the `
 
 ## Contact
 
-Tanzil Hossain - [@tanzil_hossain](https://twitter.com/tanzil_hossain) - tanzilhossain@example.com
+Tanzil Hossain - [@tanzil_hossain](https://twitter.com/tanzil_hossain) - mamunhossain128169@gmail.com
 
 Project Link: [https://github.com/your_username/firebase-tanzil-portfolio](https://github.com/your_username/firebase-tanzil-portfolio)
