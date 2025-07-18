@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
+import React from "react";
 
 export default function ProjectDetailPage({ params }) {
-  const { id } = params;
+  const actualParams = React.use(params);
+  const { id } = actualParams;
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

@@ -29,7 +29,7 @@ const ContactSection = () => {
   const [errors, setErrors] = useState({});
 
   // Web3Forms access key
-  const WEB3FORMS_ACCESS_KEY = "a844a83a-bad5-4e25-9666-ee83cf9fe852";
+  const WEB3FORMS_ACCESS_KEY = "e18e94ea-2ad7-4120-8b40-9a3f61a419a6";
 
   const validateForm = () => {
     const newErrors = {};
@@ -149,8 +149,8 @@ const ContactSection = () => {
     {
       icon: <Mail className="text-purple-400" size={24} />,
       title: "Email Me",
-      detail: "mamunhossain128169@gmail.com",
-      href: "mailto:mamunhossain128169@gmail.com",
+      detail: "mamundev1281@gmail.com",
+      href: "mailto:mamundev1281@gmail.com",
     },
     {
       icon: <Phone className="text-purple-400" size={24} />,

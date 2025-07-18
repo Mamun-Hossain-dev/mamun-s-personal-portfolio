@@ -40,7 +40,7 @@ const Footer = () => {
   const contactInfo = [
     {
       icon: <Mail size={20} className="inline-block mr-2" />,
-      text: "mamunhossain128169@gmail.com",
+      text: "mamundev1281@gmail.com",
     },
     {
       icon: <Phone size={20} className="inline-block mr-2" />,

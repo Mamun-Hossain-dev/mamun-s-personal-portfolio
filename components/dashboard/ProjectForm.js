@@ -14,10 +14,10 @@ const generateUniqueId = () => {
 };
 
 const CLOUDINARY_UPLOAD_PRESET = "mamun's portfolio";
-const CLOUDINARY_CLOUD_NAME = "mamun-s-personal-portfolio";
+const CLOUDINARY_CLOUD_NAME = "dlcpaiziv";
 const CLOUDINARY_API_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
-const ProjectForm = ({ onSubmit, initialData }) => {
+const ProjectForm = ({ onSubmit, initialData, onClose }) => {
   const [title, setTitle] = useState(initialData?.title || "");
   const [liveLink, setLiveLink] = useState(initialData?.liveLink || "");
   const [repoLink, setRepoLink] = useState(initialData?.repoLink || "");
@@ -75,7 +75,7 @@ const ProjectForm = ({ onSubmit, initialData }) => {
         return;
       }
       // Save to Firestore
-      const id = generateUniqueId();
+      const id = initialData?.id || generateUniqueId();
       await setDoc(doc(collection(db, "projects"), id), {
         title,
         liveLink,
@@ -84,10 +84,11 @@ const ProjectForm = ({ onSubmit, initialData }) => {
         description,
         techStack,
         tags,
-        createdAt: Timestamp.now(),
+        createdAt: initialData?.createdAt || Timestamp.now(),
       });
       if (onSubmit)
         onSubmit({
+          id,
           title,
           liveLink,
           repoLink,
@@ -105,6 +106,7 @@ const ProjectForm = ({ onSubmit, initialData }) => {
       setDescription("");
       setTechStack("");
       setTags("");
+      if (onClose) onClose();
     } catch (err) {
       setError("Failed to save project. Please try again.");
       console.error(err);
@@ -204,13 +206,25 @@ const ProjectForm = ({ onSubmit, initialData }) => {
         />
       </div>
       {error && <div className="text-red-500 text-sm">{error}</div>}
-      <button
-        type="submit"
-        className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded font-semibold"
-        disabled={loading || isCompressing}
-      >
-        {loading ? "Saving..." : "Save Project"}
-      </button>
+      <div className="flex justify-end space-x-3">
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={loading}
+            className="px-4 py-2 text-gray-300 border border-gray-600 rounded-lg hover:bg-gray-700"
+          >
+            Cancel
+          </button>
+        )}
+        <button
+          type="submit"
+          className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded font-semibold"
+          disabled={loading || isCompressing}
+        >
+          {loading ? "Saving..." : "Save Project"}
+        </button>
+      </div>
     </form>
   );
 };

@@ -59,7 +59,7 @@ export default function CaseStudyForm({ caseStudy, onClose, onSuccess }) {
       formData.append("file", compressedFile);
       formData.append("upload_preset", "mamun's portfolio");
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/mamun-s-personal-portfolio/image/upload",
+        "https://api.cloudinary.com/v1_1/dlcpaiziv/image/upload",
         {
           method: "POST",
           body: formData,
