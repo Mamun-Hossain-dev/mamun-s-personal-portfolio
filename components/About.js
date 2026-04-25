@@ -58,7 +58,7 @@ const About = () => {
         >
           <div className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-[18px] border border-[#2C2C2E] bg-[#1C1C1E]">
             <Image
-              src="/images/mamun.jpg"
+              src="/images/mamun.jpeg"
               alt="Mamun Hossain"
               fill
               sizes="420px"

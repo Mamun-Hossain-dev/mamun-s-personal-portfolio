@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Services from "@/components/Services";
+import WorkExperience from "@/components/WorkExperience";
 import React from "react";
 
 const page = () => {
@@ -16,6 +17,9 @@ const page = () => {
 
       {/* about section */}
       <About />
+
+      {/* work experience section */}
+      <WorkExperience />
 
       {/* services section */}
       <Services />

@@ -131,7 +131,7 @@ const Services = () => {
             onClick={() => {
               window.location.href = "/contact";
             }}
-            className="group flex items-center gap-3 rounded-[980px] bg-[#2997FF] px-6 py-3 text-[17px] font-normal text-white transition-all duration-300 hover:brightness-110 hover:shadow-[0_14px_34px_rgba(41,151,255,0.22)]"
+            className="group flex items-center gap-3 rounded-[980px] border border-white/80 bg-white px-6 py-3 text-[17px] font-medium text-[#0a0a0a] shadow-[0_12px_30px_rgba(255,255,255,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(255,255,255,0.18)]"
           >
             <span>Get in Touch</span>
             <ArrowRight

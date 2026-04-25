@@ -82,26 +82,26 @@ const Hero = memo(() => {
           >
             <motion.button
               whileHover={{
-                filter: "brightness(1.1)",
-                boxShadow: "0 14px 34px rgba(41, 151, 255, 0.22)",
+                y: -2,
+                boxShadow: "0 18px 40px rgba(255, 255, 255, 0.16)",
               }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3, ease: appleEase }}
               onClick={handleConnectClick}
-              className="rounded-[980px] bg-[#2997FF] px-6 py-3 text-[17px] font-normal text-white transition-all cursor-pointer"
+              className="cursor-pointer rounded-[980px] border border-white/80 bg-white px-6 py-3 text-[17px] font-medium text-[#0a0a0a] shadow-[0_10px_30px_rgba(255,255,255,0.12)] transition-all"
               aria-label="Connect with Mamun Hossain"
             >
               Connect with me
             </motion.button>
             <motion.button
               whileHover={{
-                filter: "brightness(1.1)",
-                boxShadow: "0 14px 34px rgba(0, 0, 0, 0.28)",
+                y: -2,
+                boxShadow: "0 16px 34px rgba(255, 255, 255, 0.08)",
               }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3, ease: appleEase }}
               onClick={handleResumeClick}
-              className="rounded-[980px] border border-white/30 bg-transparent px-6 py-3 text-[17px] font-normal text-white backdrop-blur-sm transition-all cursor-pointer"
+              className="cursor-pointer rounded-[980px] border border-white/15 bg-white/8 px-6 py-3 text-[17px] font-medium text-white backdrop-blur-md transition-all"
               aria-label="View Mamun Hossain's resume"
             >
               View Resume
@@ -134,7 +134,7 @@ const Hero = memo(() => {
         >
           <div className="relative aspect-square w-72 overflow-hidden rounded-full border border-[#2C2C2E] bg-[#1C1C1E] shadow-[inset_0_0_40px_rgba(255,255,255,0.04)] md:w-96">
             <Image
-              src="/images/mamun.jpg"
+              src="/images/mamun.jpeg"
               alt="Mamun Hossain"
               fill
               sizes="(max-width: 768px) 288px, 384px"
