@@ -3,125 +3,141 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+const appleEase = [0.25, 0.1, 0.25, 1];
+
 const Services = () => {
-  const services = [
+  const skillGroups = [
     {
-      number: "01",
-      title: "Frontend Development",
-      description:
-        "Build responsive, high-performance UIs with React, Next.js, TypeScript, Redux, and Tailwind. Focus on clean code, SEO, and accessibility.",
+      title: "Languages",
+      items: ["TypeScript", "JavaScript", "C++", "HTML5", "CSS3"],
     },
     {
-      number: "02",
-      title: "Backend & API Development",
-      description:
-        "Develop robust REST APIs and secure authentication systems using Node.js, Express, MongoDB, and JWT.",
+      title: "Frontend",
+      items: [
+        "React.js",
+        "Next.js 14",
+        "Tailwind CSS",
+        "Shadcn/UI",
+        "Radix UI",
+        "Zustand",
+        "TanStack React Query",
+        "React Hook Form",
+        "Zod",
+      ],
     },
     {
-      number: "03",
-      title: "Full Stack MERN Solutions",
-      description:
-        "Deliver end-to-end scalable web applications using the MERN stack, integrating modern tools like Firebase, Cloudinary, and Clerk.",
+      title: "Backend",
+      items: [
+        "Node.js",
+        "Express.js",
+        "REST APIs",
+        "JWT",
+        "NextAuth",
+        "Stripe (Checkout + Webhooks)",
+        "Socket.io",
+        "Nodemailer",
+      ],
     },
     {
-      number: "04",
-      title: "UI/UX & Prototyping",
-      description:
-        "Design and prototype user interfaces in Figma, ensuring pixel-perfect, user-friendly, and accessible experiences.",
+      title: "Database & ORM",
+      items: [
+        "PostgreSQL",
+        "MongoDB",
+        "Prisma ORM",
+        "Mongoose",
+        "Redis (Upstash)",
+      ],
     },
     {
-      number: "05",
-      title: "Performance & SEO Optimization",
-      description:
-        "Optimize web apps for speed, SEO, and best practices, ensuring top performance and discoverability.",
+      title: "Cloud & Tools",
+      items: [
+        "Cloudinary",
+        "Firebase",
+        "Git",
+        "GitHub",
+        "Vercel",
+        "Postman",
+        "Swagger/OpenAPI",
+      ],
+    },
+    {
+      title: "Currently Exploring",
+      items: [
+        "Docker",
+        "CI/CD pipelines",
+        "deployment workflows",
+        "system design",
+      ],
     },
   ];
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <section
       id="services"
-      className="py-20 bg-gradient-to-b from-gray-900 to-black"
+      className="border-t border-white/[0.08] bg-[#0a0a0a] py-32"
     >
-      <div className="container mx-auto px-4">
-        {/* Section title */}
-        <div className="flex flex-col items-center mb-16 relative">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-center mb-4"
-          >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-              My Services
-            </span>
-          </motion.h2>
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "100%" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full max-w-md"
-          />
-        </div>
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: appleEase }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-16"
+        >
+          <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#86868B]">
+            Skills
+          </p>
+          <h2 className="max-w-3xl text-[clamp(40px,6vw,48px)] font-bold leading-tight tracking-[-0.03em] text-[#F5F5F7]">
+            Modern full-stack tools for fast, maintainable product work.
+          </h2>
+        </motion.div>
 
-        {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {services.map((service, index) => (
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {skillGroups.map((group, index) => (
             <motion.div
-              key={service.number}
-              initial={{ opacity: 0, y: 50 }}
+              key={group.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border border-white/10 shadow-xl hover:shadow-purple-500/20 transition-all"
-              whileHover={{ y: -10 }}
+              transition={{ duration: 0.7, delay: index * 0.06, ease: appleEase }}
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="rounded-[18px] border border-[#2C2C2E] bg-[#1C1C1E] p-6 transition-all duration-300 hover:border-white/[0.15] hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
             >
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">
-                      {service.number}
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-300">{service.description}</p>
-                </div>
+              <h3 className="text-xl font-bold text-[#F5F5F7]">
+                {group.title}
+              </h3>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full bg-[#2C2C2E] px-3 py-1 text-xs text-[#86868B]"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Contact button */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="flex justify-center mt-16"
+          transition={{ duration: 0.7, delay: 0.2, ease: appleEase }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-14"
         >
           <button
             onClick={() => {
               window.location.href = "/contact";
             }}
-            className="group flex items-center gap-3 px-8 py-4 rounded-full font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-all duration-500 bg-size-200 hover:bg-right-bottom hover:shadow-xl hover:shadow-purple-500/30"
+            className="group flex items-center gap-3 rounded-[980px] bg-[#2997FF] px-6 py-3 text-[17px] font-normal text-white transition-all duration-300 hover:brightness-110 hover:shadow-[0_14px_34px_rgba(41,151,255,0.22)]"
           >
             <span>Get in Touch</span>
-            <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight
+              size={20}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
           </button>
         </motion.div>
       </div>

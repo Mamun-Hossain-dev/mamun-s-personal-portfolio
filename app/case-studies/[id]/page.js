@@ -43,19 +43,19 @@ export default function CaseStudyDetailPage({ params }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+      <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a]">
+        <div className="h-16 w-16 animate-spin rounded-full border-b-4 border-t-4 border-[#2997FF]"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] text-[#F5F5F7]">
         <p className="text-2xl text-red-400 mb-4">{error}</p>
         <button
           onClick={() => router.back()}
-          className="px-6 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors"
+          className="rounded-[980px] bg-[#2997FF] px-6 py-3 text-white transition-all hover:brightness-110"
         >
           Go Back
         </button>
@@ -68,33 +68,34 @@ export default function CaseStudyDetailPage({ params }) {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 py-12 md:py-20">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#F5F5F7]">
+      <div className="mx-auto max-w-4xl px-6 py-20 md:py-32">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-8 transition-colors group"
+            className="group mb-8 flex items-center gap-2 text-[#2997FF] transition-all hover:brightness-110"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span>Go Back</span>
           </button>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-              {caseStudy.title}
-            </span>
+          <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#86868B]">
+            Case Study
+          </p>
+          <h1 className="mb-4 text-[clamp(40px,6vw,56px)] font-bold leading-tight tracking-[-0.03em] text-[#F5F5F7]">
+            {caseStudy.title}
           </h1>
 
           <div className="flex flex-wrap items-center gap-2 mb-8">
-            <Tag className="w-5 h-5 text-gray-400" />
+            <Tag className="w-5 h-5 text-[#86868B]" />
             {caseStudy.tags?.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 text-sm bg-gray-800 text-purple-300 rounded-full"
+                className="rounded-full bg-[#2C2C2E] px-3 py-1 text-xs text-[#86868B]"
               >
                 {tag}
               </span>
@@ -105,8 +106,8 @@ export default function CaseStudyDetailPage({ params }) {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="my-8 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/10 border border-white/10"
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+          className="my-8 overflow-hidden rounded-[18px] border border-[#2C2C2E]"
         >
           {caseStudy.imageUrl && (
             <Image
@@ -123,8 +124,8 @@ export default function CaseStudyDetailPage({ params }) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed"
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          className="prose prose-invert prose-lg max-w-none text-[17px] leading-[1.6] text-[#86868B]"
         >
           <p>{caseStudy.description}</p>
         </motion.div>

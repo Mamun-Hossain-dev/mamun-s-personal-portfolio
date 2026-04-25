@@ -59,24 +59,27 @@ export default function CaseStudiesPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-center mb-4 text-white">
+      <div className="min-h-screen bg-[#0a0a0a] py-32">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#86868B]">
+            Case Studies
+          </p>
+          <h1 className="mb-4 text-[clamp(40px,6vw,48px)] font-bold leading-tight tracking-[-0.03em] text-[#F5F5F7]">
             Case Studies
           </h1>
-          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+          <p className="mb-12 max-w-2xl text-[17px] leading-[1.6] text-[#86868B]">
             Dive into our detailed case studies showcasing the challenges
             we&apos;ve tackled and the solutions we&apos;ve delivered.
           </p>
 
           {loading ? (
             <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+              <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-[#2997FF]"></div>
             </div>
           ) : caseStudies.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 space-y-4">
               <svg
-                className="w-16 h-16 text-gray-600"
+                className="h-16 w-16 text-[#86868B]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -88,10 +91,10 @@ export default function CaseStudiesPage() {
                   d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                 />
               </svg>
-              <h3 className="text-xl font-semibold text-gray-300">
+              <h3 className="text-xl font-bold text-[#F5F5F7]">
                 No Case Studies Found
               </h3>
-              <p className="text-gray-400 text-center max-w-md">
+              <p className="max-w-md text-center text-[#86868B]">
                 We&apos;re currently working on adding new case studies. Check
                 back soon!
               </p>
@@ -109,7 +112,7 @@ export default function CaseStudiesPage() {
                   <Link
                     key={study.id}
                     href={`/case-studies/${study.id}`}
-                    className="block bg-white/10 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 border border-white/10 backdrop-blur-md"
+                    className="block overflow-hidden rounded-[18px] border border-[#2C2C2E] bg-[#1C1C1E] transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
                   >
                     {study.imageUrl ? (
                       <Image
@@ -118,12 +121,12 @@ export default function CaseStudiesPage() {
                         width={120}
                         height={80}
                         style={{ width: 120, height: "auto" }}
-                        className="rounded-lg shadow"
+                        className="rounded-lg"
                       />
                     ) : (
-                      <div className="bg-gray-800 w-full h-48 flex items-center justify-center">
+                      <div className="flex h-48 w-full items-center justify-center bg-[#111111]">
                         <svg
-                          className="w-12 h-12 text-gray-600"
+                          className="h-12 w-12 text-[#86868B]"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -138,10 +141,10 @@ export default function CaseStudiesPage() {
                       </div>
                     )}
                     <div className="p-6">
-                      <h2 className="font-bold text-xl mb-2 text-white">
+                      <h2 className="mb-2 text-xl font-bold text-[#F5F5F7]">
                         {study.title}
                       </h2>
-                      <p className="text-gray-300 text-sm mb-4 line-clamp-3">
+                      <p className="mb-4 line-clamp-3 text-sm leading-[1.6] text-[#86868B]">
                         {study.description}
                       </p>
                       {tagsArray.length > 0 && (
@@ -149,7 +152,7 @@ export default function CaseStudiesPage() {
                           {tagsArray.map((tag, idx) => (
                             <span
                               key={idx}
-                              className="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium"
+                              className="rounded-full bg-[#2C2C2E] px-3 py-1 text-xs text-[#86868B]"
                             >
                               {tag}
                             </span>

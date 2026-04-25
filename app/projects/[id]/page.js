@@ -36,18 +36,18 @@ export default function ProjectDetailPage({ params }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a]">
+        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-[#2997FF]"></div>
       </div>
     );
   }
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] text-[#F5F5F7]">
         <p className="text-2xl text-red-400 mb-4">{error}</p>
         <button
           onClick={() => router.back()}
-          className="px-6 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors"
+          className="rounded-[980px] bg-[#2997FF] px-6 py-3 text-white transition-all hover:brightness-110"
         >
           Go Back
         </button>
@@ -57,33 +57,34 @@ export default function ProjectDetailPage({ params }) {
   if (!project) return null;
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 py-12 md:py-20">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#F5F5F7]">
+      <div className="mx-auto max-w-4xl px-6 py-20 md:py-32">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-8 transition-colors group"
+          className="group mb-8 flex items-center gap-2 text-[#2997FF] transition-colors hover:brightness-110"
         >
           <span className="text-lg">←</span>
           <span>Go Back</span>
         </button>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-            {project.title}
-          </span>
+        <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#86868B]">
+          Project
+        </p>
+        <h1 className="mb-4 text-[clamp(40px,6vw,56px)] font-bold leading-tight tracking-[-0.03em] text-[#F5F5F7]">
+          {project.title}
         </h1>
         <div className="flex flex-wrap items-center gap-2 mb-8">
           {project.tags &&
             project.tags.split(",").map((tag, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 text-sm bg-gray-800 text-purple-300 rounded-full"
+                className="rounded-full bg-[#2C2C2E] px-3 py-1 text-xs text-[#86868B]"
               >
                 {tag.trim()}
               </span>
             ))}
         </div>
         {project.imageUrl && (
-          <div className="my-8 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/10 border border-white/10">
+          <div className="my-8 overflow-hidden rounded-[18px] border border-[#2C2C2E]">
             <Image
               src={project.imageUrl}
               alt={project.title}
@@ -94,19 +95,19 @@ export default function ProjectDetailPage({ params }) {
             />
           </div>
         )}
-        <div className="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed mb-8">
+        <div className="prose prose-invert prose-lg mb-8 max-w-none text-[17px] leading-[1.6] text-[#86868B]">
           <p>{project.description}</p>
         </div>
         {project.techStack && (
           <div className="mb-6">
-            <h3 className="font-semibold text-lg mb-2 text-white">
+            <h3 className="mb-2 text-lg font-bold text-[#F5F5F7]">
               Tech Stack
             </h3>
             <div className="flex flex-wrap gap-2">
               {project.techStack.split(",").map((tech, idx) => (
                 <span
                   key={idx}
-                  className="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium"
+                  className="rounded-full bg-[#2C2C2E] px-3 py-1 text-xs text-[#86868B]"
                 >
                   {tech.trim()}
                 </span>
@@ -120,7 +121,7 @@ export default function ProjectDetailPage({ params }) {
               href={project.liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
+              className="rounded-[980px] bg-[#2997FF] px-6 py-3 text-[17px] font-normal text-white transition-all hover:brightness-110"
             >
               Live Site
             </Link>
@@ -130,7 +131,7 @@ export default function ProjectDetailPage({ params }) {
               href={project.repoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 bg-gray-800 text-purple-300 rounded-lg font-semibold border border-purple-700 hover:bg-gray-900 transition"
+              className="rounded-[980px] border border-white/30 bg-transparent px-6 py-3 text-[17px] font-normal text-white backdrop-blur-sm transition-all hover:brightness-110"
             >
               Source Code
             </Link>

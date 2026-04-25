@@ -6,7 +6,7 @@ export const metadata = {
   metadataBase: new URL("https://mamun-hossain.vercel.app"),
   title: "Mamun Hossain - Full Stack Web Developer",
   description:
-    "Mamun Hossain's portfolio showcasing expertise in React, Next.js, Node.js, Express, Firebase, and MongoDB. Modern, secure, and scalable web applications for businesses.",
+    "Mamun Hossain is a Full-Stack Web Developer building scalable, high-performance web applications with React, Next.js, and Node.js.",
   keywords: [
     "Mamun Hossain",
     "Full Stack Developer",
@@ -15,6 +15,8 @@ export const metadata = {
     "Next.js",
     "Node.js",
     "Express.js",
+    "PostgreSQL",
+    "Prisma",
     "MongoDB",
     "Firebase",
     "Portfolio",
@@ -29,7 +31,7 @@ export const metadata = {
   openGraph: {
     title: "Mamun Hossain - Full Stack Web Developer",
     description:
-      "I'm a full stack JavaScript developer based in Bangladesh, specializing in building modern, secure, and scalable web applications.",
+      "Full-Stack Web Developer building scalable, high-performance web applications with React, Next.js, and Node.js.",
     url: "https://mamun-hossain.vercel.app",
     siteName: "Mamun Hossain's Portfolio",
     images: [
@@ -52,7 +54,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Mamun Hossain - Full Stack Web Developer",
     description:
-      "I'm a full stack JavaScript developer based in Bangladesh, specializing in building modern, secure, and scalable web applications.",
+      "Full-Stack Web Developer building scalable, high-performance web applications with React, Next.js, and Node.js.",
     images: ["/images/mamun.jpg"],
   },
 };

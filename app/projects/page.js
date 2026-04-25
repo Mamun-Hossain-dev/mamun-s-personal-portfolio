@@ -28,23 +28,30 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div className="min-h-[60vh] py-20 px-4 max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
-        Projects
-      </h1>
+    <div className="mx-auto min-h-[60vh] max-w-6xl px-6 py-32">
+      <div className="mb-16">
+        <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#86868B]">
+          Selected Work
+        </p>
+        <h1 className="text-[clamp(40px,6vw,48px)] font-bold leading-tight tracking-[-0.03em] text-[#F5F5F7]">
+          Projects
+        </h1>
+      </div>
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-[#2997FF]"></div>
         </div>
       ) : projects.length === 0 ? (
-        <p className="text-lg text-gray-300 text-center">No projects found.</p>
+        <p className="text-center text-[17px] text-[#86868B]">
+          No projects found.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <Link
               key={project.id}
               href={`/projects/${project.id}`}
-              className="bg-gray-900 rounded-2xl shadow-lg hover:shadow-purple-500/30 transition-shadow border border-white/10 overflow-hidden group flex flex-col"
+              className="group flex flex-col overflow-hidden rounded-[18px] border border-[#2C2C2E] bg-[#1C1C1E] transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
             >
               {project.imageUrl && (
                 <div className="relative w-full h-56">
@@ -58,10 +65,10 @@ export default function ProjectsPage() {
                 </div>
               )}
               <div className="p-6 flex-1 flex flex-col">
-                <h2 className="font-bold text-2xl mb-2 text-white line-clamp-1">
+                <h2 className="mb-2 line-clamp-1 text-2xl font-bold text-[#F5F5F7]">
                   {project.title}
                 </h2>
-                <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-1">
+                <p className="mb-4 line-clamp-3 flex-1 text-sm leading-[1.6] text-[#86868B]">
                   {project.description}
                 </p>
                 {project.techStack && (
@@ -69,7 +76,7 @@ export default function ProjectsPage() {
                     {project.techStack.split(",").map((tech, idx) => (
                       <span
                         key={idx}
-                        className="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium"
+                        className="rounded-full bg-[#2C2C2E] px-3 py-1 text-xs text-[#86868B]"
                       >
                         {tech.trim()}
                       </span>
@@ -77,7 +84,7 @@ export default function ProjectsPage() {
                   </div>
                 )}
                 <div className="mt-auto flex gap-2">
-                  <span className="text-purple-400 font-semibold hover:underline">
+                  <span className="font-normal text-[#2997FF]">
                     View Details
                   </span>
                 </div>

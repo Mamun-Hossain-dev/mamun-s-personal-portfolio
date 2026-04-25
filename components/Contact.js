@@ -1,21 +1,21 @@
 "use client";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import {
   Send,
   User,
   Mail,
   Phone,
   MessageSquare,
-  Briefcase,
   MapPin,
   Facebook,
   Twitter,
-  Instagram,
   Linkedin,
   Github,
 } from "lucide-react";
+
+const appleEase = [0.25, 0.1, 0.25, 1];
 
 const ContactSection = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +28,6 @@ const ContactSection = () => {
   });
   const [errors, setErrors] = useState({});
 
-  // Web3Forms access key
   const WEB3FORMS_ACCESS_KEY = "e18e94ea-2ad7-4120-8b40-9a3f61a419a6";
 
   const validateForm = () => {
@@ -93,7 +92,7 @@ const ContactSection = () => {
       if (result.success) {
         setMessage({
           type: "success",
-          text: "Thank you for your message! We'll get back to you soon.",
+          text: "Thank you for your message! I'll get back to you soon.",
         });
         setFormData({
           name: "",
@@ -123,128 +122,98 @@ const ContactSection = () => {
       icon: Facebook,
       href: "https://www.facebook.com/mamun.hossain.565330",
       label: "Facebook",
-      color: "hover:text-blue-500",
     },
     {
       icon: Twitter,
       href: "#",
       label: "Twitter",
-      color: "hover:text-sky-400",
     },
     {
       icon: Linkedin,
       href: "https://www.linkedin.com/in/mamun-hossain-3a568b248/",
       label: "LinkedIn",
-      color: "hover:text-blue-600",
     },
     {
       icon: Github,
-      href: "https://github.com/Mamun128169",
+      href: "https://github.com/Mamun-Hossain-dev",
       label: "Github",
-      color: "hover:text-gray-300",
     },
   ];
 
   const contactInfo = [
     {
-      icon: <Mail className="text-purple-400" size={24} />,
-      title: "Email Me",
+      icon: <Mail className="text-[#2997FF]" size={22} />,
+      title: "Email",
       detail: "mamundev1281@gmail.com",
       href: "mailto:mamundev1281@gmail.com",
     },
     {
-      icon: <Phone className="text-purple-400" size={24} />,
-      title: "Call Me",
-      detail: "+880 1640-571091",
+      icon: <Phone className="text-[#2997FF]" size={22} />,
+      title: "Phone",
+      detail: "+880-1640-571091",
       href: "tel:+8801640571091",
     },
     {
-      icon: <MapPin className="text-purple-400" size={24} />,
+      icon: <MapPin className="text-[#2997FF]" size={22} />,
       title: "Location",
-      detail: "Dhaka, Bangladesh",
+      detail: "Uttara, Dhaka, Bangladesh",
     },
   ];
 
   return (
     <section
       id="connect"
-      className="pt-10 pb-20 bg-gradient-to-br from-gray-900 to-black"
+      className="border-t border-white/[0.08] bg-[#0a0a0a] py-32"
     >
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Section title */}
-        <div className="flex flex-col items-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-center mb-4"
-          >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-              Contact With Me
-            </span>
-          </motion.h2>
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "100%" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full max-w-md"
-          />
-        </div>
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: appleEase }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-16"
+        >
+          <p className="mb-4 text-xs font-bold uppercase tracking-widest text-[#86868B]">
+            Contact
+          </p>
+          <h1 className="max-w-3xl text-[clamp(40px,6vw,48px)] font-bold leading-tight tracking-[-0.03em] text-[#F5F5F7]">
+            Let&apos;s build something production-ready.
+          </h1>
+          <p className="mt-5 max-w-2xl text-[17px] leading-[1.6] text-[#86868B]">
+            Send a message about your project, backend architecture, or full-stack
+            product needs.
+          </p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Contact Info */}
+        <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr]">
           <motion.div
             className="space-y-8"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: appleEase }}
+            viewport={{ once: true, margin: "-100px" }}
           >
-            <div>
-              <h1 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-                Let&apos;s Start a{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-                  Conversation
-                </span>
-              </h1>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                Ready to discuss your project? Fill out the form and I&apos;ll
-                get back to you within 24 hours.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {contactInfo.map((contact, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.2 }}
-                  className="hover:scale-[1.02] transition-all duration-200"
-                >
-                  <ContactItem {...contact} />
-                </motion.div>
+            <div className="space-y-4">
+              {contactInfo.map((contact) => (
+                <ContactItem key={contact.title} {...contact} />
               ))}
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">
-                Follow Me
-              </h3>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => {
+              <h3 className="text-xl font-bold text-[#F5F5F7]">Social</h3>
+              <div className="mt-4 flex gap-4">
+                {socialLinks.map((social) => {
                   const IconComponent = social.icon;
                   return (
                     <motion.a
-                      key={index}
+                      key={social.label}
                       target="_blank"
                       rel="noopener noreferrer"
                       href={social.href}
                       aria-label={social.label}
-                      className={`w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 ${social.color} transition-all duration-300`}
-                      whileHover={{ scale: 1.1, y: -5 }}
-                      whileTap={{ scale: 0.9 }}
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-[#2C2C2E] bg-[#1C1C1E] text-[#86868B] transition-colors hover:border-white/[0.15] hover:text-[#F5F5F7]"
+                      whileHover={{ y: -2, scale: 1.02 }}
+                      whileTap={{ scale: 0.96 }}
                     >
                       <IconComponent size={20} />
                     </motion.a>
@@ -254,52 +223,50 @@ const ContactSection = () => {
             </div>
           </motion.div>
 
-          {/* Right Column - Contact Form */}
           <motion.div
-            className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-white/10 p-8 lg:p-10 transition-all duration-300"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            className="rounded-[18px] border border-[#2C2C2E] bg-[#1C1C1E] p-6 md:p-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: appleEase }}
+            viewport={{ once: true, margin: "-100px" }}
           >
-            <h2 className="text-3xl font-bold text-white mb-6">Get In Touch</h2>
+            <h2 className="mb-6 text-2xl font-bold text-[#F5F5F7]">
+              Get In Touch
+            </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <AnimatedInputField
-                  icon={<User size={18} className="text-gray-400" />}
-                  label="Full Name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="Your full name"
-                  error={errors.name}
-                  required
-                />
-              </div>
+              <AnimatedInputField
+                icon={<User size={18} className="text-[#86868B]" />}
+                label="Full Name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Your full name"
+                error={errors.name}
+                required
+              />
+
+              <AnimatedInputField
+                icon={<Mail size={18} className="text-[#86868B]" />}
+                label="Email Address"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="your.email@example.com"
+                error={errors.email}
+                required
+              />
 
               <div>
-                <AnimatedInputField
-                  icon={<Mail size={18} className="text-gray-400" />}
-                  label="Email Address"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="your.email@example.com"
-                  error={errors.email}
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="mb-2 block text-sm font-normal text-[#86868B]">
                   Service Interest
                 </label>
                 <select
                   name="service"
                   value={formData.service}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-purple-500 focus:border-purple-500"
+                  className="w-full rounded-xl border border-[#2C2C2E] bg-[#0a0a0a] px-4 py-3 text-[#F5F5F7] outline-none transition-colors focus:border-[#2997FF]"
                 >
                   <option value="">Select a service</option>
                   <option value="Web Development">Web Development</option>
@@ -325,8 +292,8 @@ const ContactSection = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">
-                  Description <span className="text-purple-500">*</span>
+                <label className="block text-sm font-normal text-[#86868B]">
+                  Description <span className="text-[#2997FF]">*</span>
                 </label>
                 <div className="relative">
                   <textarea
@@ -334,56 +301,46 @@ const ContactSection = () => {
                     value={formData.description}
                     onChange={handleInputChange}
                     rows={5}
-                    className={`w-full pl-10 pr-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 resize-none text-white transition-all duration-200 ${
+                    className={`w-full resize-none rounded-xl border bg-[#0a0a0a] py-3 pl-10 pr-4 text-[#F5F5F7] outline-none transition-colors focus:border-[#2997FF] ${
                       errors.description
                         ? "border-red-500/50"
-                        : "border-gray-600"
+                        : "border-[#2C2C2E]"
                     }`}
                     placeholder="Tell me about your project, requirements, or questions..."
                   />
                   <MessageSquare
-                    className="absolute left-3 top-4 text-gray-400"
+                    className="absolute left-3 top-4 text-[#86868B]"
                     size={18}
                   />
                 </div>
                 {errors.description && (
-                  <p className="text-sm text-red-400 animate-fadeIn">
-                    {errors.description}
-                  </p>
+                  <p className="text-sm text-red-400">{errors.description}</p>
                 )}
-                <p className="text-sm text-gray-500">
-                  The more details you provide, the better I can assist you.
-                </p>
               </div>
 
               <motion.button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gradient-to-r hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                whileHover={{ scale: 1.02 }}
+                className="flex w-full items-center justify-center gap-2 rounded-[980px] bg-[#2997FF] px-6 py-3 text-[17px] font-normal text-white transition-all duration-300 hover:brightness-110 hover:shadow-[0_14px_34px_rgba(41,151,255,0.22)] disabled:cursor-not-allowed disabled:opacity-50"
                 whileTap={{ scale: 0.98 }}
               >
                 {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <>
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
                     <span>Sending...</span>
-                  </div>
+                  </>
                 ) : (
-                  <div className="flex items-center space-x-2">
-                    <Send
-                      size={20}
-                      className="group-hover:translate-x-1 transition-transform duration-200"
-                    />
+                  <>
+                    <Send size={20} />
                     <span>Send Message</span>
-                  </div>
+                  </>
                 )}
               </motion.button>
             </form>
 
-            {/* Success/Error Message */}
             {message.text && (
               <div
-                className={`mt-6 text-center text-base font-medium ${
+                className={`mt-6 text-center text-base ${
                   message.type === "success" ? "text-green-400" : "text-red-400"
                 }`}
               >
@@ -397,35 +354,25 @@ const ContactSection = () => {
   );
 };
 
-// Sub-components
-const AnimatedInputField = ({
-  icon,
-  label,
-  optional,
-  error,
-  required,
-  ...props
-}) => {
+const AnimatedInputField = ({ icon, label, optional, error, required, ...props }) => {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-300">
-        {label} {required && <span className="text-purple-500">*</span>}
-        {optional && <span className="text-gray-500 ml-1">(Optional)</span>}
+      <label className="block text-sm font-normal text-[#86868B]">
+        {label} {required && <span className="text-[#2997FF]">*</span>}
+        {optional && <span className="ml-1 text-[#86868B]">(Optional)</span>}
       </label>
-      <motion.div className="relative" whileHover={{ scale: 1.02 }}>
+      <div className="relative">
         <input
-          className={`w-full pl-10 pr-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition-all duration-200 ${
-            error ? "border-red-500/50" : "border-gray-600"
+          className={`w-full rounded-xl border bg-[#0a0a0a] py-3 pl-10 pr-4 text-[#F5F5F7] outline-none transition-colors focus:border-[#2997FF] ${
+            error ? "border-red-500/50" : "border-[#2C2C2E]"
           }`}
           {...props}
         />
         {icon && (
-          <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-            {icon}
-          </div>
+          <div className="absolute left-3 top-1/2 -translate-y-1/2">{icon}</div>
         )}
-      </motion.div>
-      {error && <p className="text-sm text-red-400 animate-fadeIn">{error}</p>}
+      </div>
+      {error && <p className="text-sm text-red-400">{error}</p>}
     </div>
   );
 };
@@ -433,13 +380,16 @@ const AnimatedInputField = ({
 const ContactItem = ({ icon, title, detail, href }) => {
   const content = (
     <motion.div
-      className="flex items-start space-x-4 p-4 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-white/10 transition-all duration-200"
-      whileHover={{ y: -5 }}
+      className="flex items-start gap-4 rounded-[18px] border border-[#2C2C2E] bg-[#1C1C1E] p-5 transition-all duration-300 hover:border-white/[0.15]"
+      whileHover={{ y: -4, scale: 1.02 }}
+      transition={{ duration: 0.3, ease: appleEase }}
     >
-      <div className="flex-shrink-0 mt-1">{icon}</div>
+      <div className="mt-1 shrink-0">{icon}</div>
       <div>
-        <h3 className="font-semibold text-white">{title}</h3>
-        <p className="text-gray-300 mt-1">{detail}</p>
+        <h3 className="font-bold text-[#F5F5F7]">{title}</h3>
+        <p className="mt-1 text-[17px] leading-[1.6] text-[#86868B]">
+          {detail}
+        </p>
       </div>
     </motion.div>
   );
